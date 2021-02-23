@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : NetworkBehaviour
+public class PlayerBehaviour : NetworkBehaviour
 {
     public CharacterController controller;
 

@@ -181,7 +181,6 @@ namespace Mirror.SimpleWeb
             client?.Disconnect();
         }
 
-#if MIRROR_26_0_OR_NEWER
         public override void ClientSend(int channelId, ArraySegment<byte> segment)
         {
             if (!ClientConnected())
@@ -204,31 +203,6 @@ namespace Mirror.SimpleWeb
 
             client.Send(segment);
         }
-#else
-        public override bool ClientSend(int channelId, ArraySegment<byte> segment)
-        {
-            if (!ClientConnected())
-            {
-                Debug.LogError("Not Connected");
-                return false;
-            }
-
-            if (segment.Count > maxMessageSize)
-            {
-                Log.Error("Message greater than max size");
-                return false;
-            }
-
-            if (segment.Count == 0)
-            {
-                Log.Error("Message count was zero");
-                return false;
-            }
-
-            client.Send(segment);
-            return true;
-        }
-#endif
         #endregion
 
         #region Server
@@ -280,7 +254,6 @@ namespace Mirror.SimpleWeb
             return server.KickClient(connectionId);
         }
 
-#if MIRROR_26_0_OR_NEWER
         public override void ServerSend(int connectionId, int channelId, ArraySegment<byte> segment)
         {
             if (!ServerActive())
@@ -304,31 +277,6 @@ namespace Mirror.SimpleWeb
             server.SendOne(connectionId, segment);
             return;
         }
-#else
-        public override bool ServerSend(System.Collections.Generic.List<int> connectionIds, int channelId, ArraySegment<byte> segment)
-        {
-            if (!ServerActive())
-            {
-                Debug.LogError("SimpleWebServer Not Active");
-                return false;
-            }
-
-            if (segment.Count > maxMessageSize)
-            {
-                Log.Error("Message greater than max size");
-                return false;
-            }
-
-            if (segment.Count == 0)
-            {
-                Log.Error("Message count was zero");
-                return false;
-            }
-
-            server.SendAll(connectionIds, segment);
-            return true;
-        }
-#endif
 
         public override string ServerGetClientAddress(int connectionId)
         {

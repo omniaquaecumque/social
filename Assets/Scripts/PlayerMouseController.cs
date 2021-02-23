@@ -14,7 +14,7 @@ public class PlayerMouseController : NetworkBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked;
     }
 
     //Move Player Head (and Player View) up and down when mouse moves vertically
