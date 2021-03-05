@@ -6,10 +6,13 @@ using Mirror;
 public class PlayerMove : NetworkBehaviour
 {
     public CharacterController controller;
+    public GameObject bullet;
+    public Transform BulletSpawn;
 
     public float jump = 7.0f;
     public float gravity = 9.8f;
     public float speed = 6.0f;
+    public float bulletSpeed = 10f;
 
     private Vector3 direction = Vector3.zero;
 
@@ -17,6 +20,7 @@ public class PlayerMove : NetworkBehaviour
     void Update()
     {
         Move();
+        Shoot();
     }
 
     void Move()
@@ -38,4 +42,18 @@ public class PlayerMove : NetworkBehaviour
             controller.Move(direction * Time.deltaTime);
         }
     }
+
+    // shoot
+    private void Shoot()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameObject newBullet;
+            newBullet = Instantiate(bullet, BulletSpawn.position, BulletSpawn.rotation);
+            newBullet.GetComponent<Rigidbody>().velocity = newBullet.transform.forward * bulletSpeed;
+            Debug.Log("Shoot");
+            Destroy(newBullet, 3f);
+        }
+    }
+
 }

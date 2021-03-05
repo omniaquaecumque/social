@@ -77,7 +77,7 @@ public class #SCRIPTNAME# : NetworkManager
 
     /// <summary>
     /// This causes the server to switch scenes and sets the networkSceneName.
-    /// <para>Clients that connect to this server will automatically switch to this scene. This is called autmatically if onlineScene or offlineScene are set, but it can be called from user code to switch scenes again while the game is in progress. This automatically sets clients to be not-ready. The clients must call NetworkClient.Ready() again to participate in the new scene.</para>
+    /// <para>Clients that connect to this server will automatically switch to this scene. This is called automatically if onlineScene or offlineScene are set, but it can be called from user code to switch scenes again while the game is in progress. This automatically sets clients to be not-ready. The clients must call NetworkClient.Ready() again to participate in the new scene.</para>
     /// </summary>
     /// <param name="newSceneName"></param>
     public override void ServerChangeScene(string newSceneName)
@@ -158,13 +158,6 @@ public class #SCRIPTNAME# : NetworkManager
         base.OnServerDisconnect(conn);
     }
 
-    /// <summary>
-    /// Called on the server when a network error occurs for a client connection.
-    /// </summary>
-    /// <param name="conn">Connection from client.</param>
-    /// <param name="errorCode">Error code.</param>
-    public override void OnServerError(NetworkConnection conn, int errorCode) { }
-
     #endregion
 
     #region Client System Callbacks
@@ -188,13 +181,6 @@ public class #SCRIPTNAME# : NetworkManager
     {
         base.OnClientDisconnect(conn);
     }
-
-    /// <summary>
-    /// Called on clients when a network error occurs.
-    /// </summary>
-    /// <param name="conn">Connection to a server.</param>
-    /// <param name="errorCode">Error code.</param>
-    public override void OnClientError(NetworkConnection conn, int errorCode) { }
 
     /// <summary>
     /// Called on clients when a servers tells the client it is no longer ready.
