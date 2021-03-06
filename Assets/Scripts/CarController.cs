@@ -24,6 +24,12 @@ public class CarController : MonoBehaviour
     [SerializeField] private Transform rearLeftWheelTransform;
     [SerializeField] private Transform rearRightWheelTransform;    
 
+    void Update() {
+        // Fall Detection 
+        if (this.transform.position.y <= -10) {
+            this.transform.position = new Vector3(0, 0, 0);
+        }
+    }
     void FixedUpdate() {
         GetInput();
         Drive();
