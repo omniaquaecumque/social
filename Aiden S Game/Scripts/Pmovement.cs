@@ -9,13 +9,8 @@ public class Pmovement : NetworkBehaviour
 
     public CharacterController controller;
 
+    public bool inTask = false;
 
-    // Start is called before the first frame update
-
-    private void Start()
-    {
-       //Physics.IgnoreLayerCollision(0, 8, true);
-    }
 
     void CharacterMovement() 
     {
@@ -30,6 +25,6 @@ public class Pmovement : NetworkBehaviour
 
     private void Update()
     {
-        CharacterMovement();
+        if (!inTask) { CharacterMovement(); }
     }
 }

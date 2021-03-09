@@ -43,6 +43,8 @@ public class CameraMovement : NetworkBehaviour
 
     private void Update()
     {
-        CameraZoom();
+
+        if (!this.GetComponent<Pmovement>().inTask) { CameraZoom(); }
+       
     }
 }
