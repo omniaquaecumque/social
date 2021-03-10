@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 30px;
+  border: black;
+  border-radius: 2px;
+  border-style: solid;
+}
+
+.form {
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: left;
+}
+
+.question {
+  width: 100%;
+}
+
+#long {
+  height: 50px;
+  resize: vertical;
+}
+
+.subbutton {
+  width: 150px;
+  height: 50px;
+  background-color: red;
+}
