@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\PlayerRot.cs" />
     <Compile Include="Assets\Scripts\bulletBeh.cs" />
+    <Compile Include="Assets\Scripts\hiddenBeh.cs" />
     <Compile Include="Assets\Vivox\Samples\TanksUnityGameSample\Mirror\Components\NetworkAnimator.cs" />
     <Compile Include="Assets\Vivox\Samples\TanksUnityGameSample\Mirror\Components\NetworkLobbyManager.cs" />
     <Compile Include="Assets\Vivox\Samples\TanksUnityGameSample\Mirror\Components\NetworkLobbyPlayer.cs" />

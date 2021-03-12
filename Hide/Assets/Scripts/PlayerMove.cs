@@ -7,7 +7,8 @@ public class PlayerMove : NetworkBehaviour
 {
     public CharacterController controller;
     public GameObject bullet;
-    public Transform BulletSpawn;
+    public Transform FirePos;
+    public GameObject body;
 
     public float jump = 7.0f;
     public float gravity = 9.8f;
@@ -19,28 +20,29 @@ public class PlayerMove : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Shoot();
+        if (isLocalPlayer)
+        {
+            Move();
+            Shoot();
+        }
     }
 
     void Move()
     {
-        if (isLocalPlayer)
+        if (controller.isGrounded)
         {
-            if (controller.isGrounded)
+            direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            direction = body.transform.TransformDirection(direction);
+            direction *= speed;
+            if (Input.GetButton("Jump"))
             {
-                direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-                direction = transform.TransformDirection(direction);
-                direction *= speed;
-                if (Input.GetButton("Jump"))
-                {
-                    direction.y = jump;
-                }
+                direction.y = jump;
             }
-            else
-                direction.y -= gravity * Time.deltaTime;
-            controller.Move(direction * Time.deltaTime);
         }
+        else
+            direction.y -= gravity * Time.deltaTime;
+        controller.Move(direction * Time.deltaTime);
+
     }
 
     // shoot
@@ -49,9 +51,9 @@ public class PlayerMove : NetworkBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GameObject newBullet;
-            newBullet = Instantiate(bullet, BulletSpawn.position, BulletSpawn.rotation);
+            newBullet = Instantiate(bullet, FirePos.position, FirePos.rotation);
             newBullet.GetComponent<Rigidbody>().velocity = newBullet.transform.forward * bulletSpeed;
-            Debug.Log("Shoot");
+            // Debug.Log("Shoot");
             Destroy(newBullet, 3f);
         }
     }

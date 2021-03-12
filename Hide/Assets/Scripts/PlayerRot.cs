@@ -5,6 +5,9 @@ using Mirror;
 
 public class PlayerRot : NetworkBehaviour
 {
+    public GameObject head;
+    public GameObject body;
+    public GameObject gun;
     // camera sensitivities
     public float horSensitivity = 3f;
     public float verSensitivity = 3f;
@@ -18,7 +21,7 @@ public class PlayerRot : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        verRot = transform.eulerAngles.x;
+        verRot = head.transform.eulerAngles.x;
     }
 
     // Update is called once per frame
@@ -29,8 +32,10 @@ public class PlayerRot : NetworkBehaviour
 
         verRot -= verMouse * verSensitivity;
         verRot = Mathf.Clamp(verRot, minRot, maxRot);
-        float horRot = transform.eulerAngles.y + horMouse * horSensitivity;
+        float horRot = body.transform.eulerAngles.y + horMouse * horSensitivity;
 
-        transform.localEulerAngles = new Vector3(verRot, horRot, 0);
+        head.transform.localEulerAngles = new Vector3(verRot, 0, 0);
+        body.transform.localEulerAngles = new Vector3(0, horRot, 0);
+        gun.transform.localEulerAngles = new Vector3(verRot, 0, -90);
     }
 }

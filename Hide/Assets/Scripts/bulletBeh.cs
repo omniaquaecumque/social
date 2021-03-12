@@ -5,17 +5,13 @@ using Mirror;
 
 public class bulletBeh : NetworkBehaviour
 {
-    public float speed = 10f;
-    public float time = 20f;
-    void Update()
+    public void OnCollisionEnter(Collision collision)
     {
-        /*
-        transform.position += transform.forward * speed * Time.deltaTime;
-        time -= Time.deltaTime;
-        if (time <= 0f)
+        // collide to hidden object
+        if (collision.gameObject.CompareTag("Hidden"))
         {
-            Destroy(gameObject);
+            Debug.Log("Hidden found");
         }
-        */
+        Destroy(gameObject);
     }
 }
