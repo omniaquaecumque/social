@@ -8,14 +8,14 @@
   border-style: solid;
 }
 
-.form {
-  margin-left: 10%;
+li {
+  margin-left: 20%;
   margin-right: 10%;
   text-align: left;
 }
 
 .question {
-  width: 100%;
+  width: 600px;
 }
 
 #long {
@@ -23,8 +23,12 @@
   resize: vertical;
 }
 
-.subbutton {
-  width: 150px;
-  height: 50px;
-  background-color: red;
+#Qname {
+  margin-left: 20%;
+  margin-right: 10%;
+  text-align: left;
+}
+
+span {
+  display: block;
 }
