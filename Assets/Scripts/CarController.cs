@@ -9,6 +9,9 @@ public class CarController : MonoBehaviour
     float currentBreakForce;
     float steerAngle; 
     bool isBreaking;
+    Rigidbody carBody;
+
+    [SerializeField] private Transform respawnPoint;
 
     [SerializeField] private float motorForce; 
     [SerializeField] private float breakForce; 
@@ -27,7 +30,10 @@ public class CarController : MonoBehaviour
     void Update() {
         // Fall Detection 
         if (this.transform.position.y <= -10) {
-            this.transform.position = new Vector3(0, 0, 0);
+            carBody = GetComponent<Rigidbody>();
+            this.transform.position = respawnPoint.transform.position;
+            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+            carBody.velocity = Vector3.zero;                  
         }
     }
     void FixedUpdate() {

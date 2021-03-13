@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovementTest : MonoBehaviour
 {
     public Transform cam;     
-    public float speed = 6f; 
+    public float speed = 5f; 
     public float jumpForce = 10f;
     public Rigidbody rb; 
     public bool onGround = true; 
@@ -23,14 +23,7 @@ public class PlayerMovementTest : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        Vector3 dir = new Vector3(horizontal, 0f, vertical).normalized;
-        if (dir.magnitude >= 0.1f) {
-            float turnAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, turnAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            rb.MoveRotation(transform.rotation);
-        }        
+        Vector3 dir = new Vector3(horizontal, 0f, vertical).normalized;   
 
         Vector2 input = new Vector2(horizontal, vertical);
         input = Vector2.ClampMagnitude(input, 1);
