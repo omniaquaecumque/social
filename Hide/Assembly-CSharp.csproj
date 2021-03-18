@@ -64,11 +64,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AssignHidden.cs" />
     <Compile Include="Assets\Scripts\PlayerCamPos.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\PlayerRot.cs" />
     <Compile Include="Assets\Scripts\bulletBeh.cs" />
     <Compile Include="Assets\Scripts\hiddenBeh.cs" />
+    <Compile Include="Assets\Scripts\lightControl.cs" />
     <Compile Include="Assets\Vivox\Samples\TanksUnityGameSample\Mirror\Components\NetworkAnimator.cs" />
     <Compile Include="Assets\Vivox\Samples\TanksUnityGameSample\Mirror\Components\NetworkLobbyManager.cs" />
     <Compile Include="Assets\Vivox\Samples\TanksUnityGameSample\Mirror\Components\NetworkLobbyPlayer.cs" />
@@ -226,6 +228,7 @@
     <None Include="Assets\Vivox\Samples\TanksUnityGameSample\PostProcessing\Resources\Shaders\Blit.shader" />
     <None Include="Assets\Vivox\Samples\TanksUnityGameSample\PostProcessing\Resources\Shaders\Bloom.cginc" />
     <None Include="Assets\Vivox\Samples\TanksUnityGameSample\PostProcessing\Editor Resources\Monitors\WaveformCompute.compute" />
+    <None Include="Assets\Wands\Read Me.txt" />
     <None Include="Assets\Vivox\Samples\TanksUnityGameSample\PostProcessing\Resources\Shaders\DepthOfField.cginc" />
     <None Include="Assets\ScriptTemplates\50-Mirror__Network Manager-NewNetworkManager.cs.txt" />
     <None Include="Assets\ScriptTemplates\54-Mirror__Network Room Manager-NewNetworkRoomManager.cs.txt" />

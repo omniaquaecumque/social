@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class hiddenBeh : NetworkBehaviour
 {
-    public GameObject endGame;
+    private GameObject endGame;
     CanvasGroup canvasGroup;
     private void Start()
     {
+        endGame = GameObject.Find("EndGame");
         canvasGroup = endGame.GetComponentInChildren<CanvasGroup>();
         canvasGroup.alpha = 0;
         canvasGroup.interactable = false;

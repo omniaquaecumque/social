@@ -7,7 +7,7 @@ public class PlayerRot : NetworkBehaviour
 {
     public GameObject head;
     public GameObject body;
-    public GameObject gun;
+    public GameObject wand;
     // camera sensitivities
     public float horSensitivity = 3f;
     public float verSensitivity = 3f;
@@ -36,6 +36,6 @@ public class PlayerRot : NetworkBehaviour
 
         head.transform.localEulerAngles = new Vector3(verRot, 0, 0);
         body.transform.localEulerAngles = new Vector3(0, horRot, 0);
-        gun.transform.localEulerAngles = new Vector3(verRot, 0, -90);
+        wand.transform.localEulerAngles = new Vector3(verRot+45, 0, 0);
     }
 }
