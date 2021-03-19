@@ -6,21 +6,36 @@ using UnityEngine.UI;
 
 public class KeyPad : NetworkBehaviour
 {
+
+    
+    //public CanvasGroup _visable;
+
+    //bool leftTask = false;
+
     bool _isReseting = false;
     public string _cardCode;
 
-    GameObject character;
+    //GameObject character;
 
-    public GameObject _mytask;
+    //public GameObject _mytask;
     
 
     public Text _inputCode;
     public int _codeLength = 6;
 
+    //public void MakeVisable() {
+    //    _visable.alpha = 1;
+    //    _visable.interactable = true;
+    //}
+
+    //public void MakeUseable() {
+    //    leftTask = false;
+    //}
 
     private void OnEnable()
     {
-        Debug.Log(_mytask.name);
+        //this.MakeVisable();
+
         string code = string.Empty;
         
         for (int i = 0; i < _codeLength; i++) {
@@ -29,8 +44,6 @@ public class KeyPad : NetworkBehaviour
 
         _cardCode = code;
         _inputCode.text = string.Empty;
-
-        character = _mytask.GetComponent<Whoisusing>().user;
     }
 
     public void ButtonClick(int number)
@@ -45,7 +58,7 @@ public class KeyPad : NetworkBehaviour
         {
             _inputCode.text = "Correct";
             StartCoroutine(ResetCode());
-            CompleteTask();
+            this.GetComponent<TaskUtil>().CompleteTask();
             _isReseting = true;
         }
         else if (_inputCode.text.Length >= _codeLength) {
@@ -61,17 +74,22 @@ public class KeyPad : NetworkBehaviour
         _isReseting = false;
     }
 
-    void CompleteTask() {
-        character.GetComponent<Pmovement>().inTask = false;
-        gameObject.SetActive(false);
-    }
+  
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            character.GetComponent<Pmovement>().inTask = false;
-            gameObject.SetActive(false);
-        }
+
+        //if (!leftTask) {
+        //    if (Input.GetKeyDown(KeyCode.Escape))
+        //    {
+        //        character.GetComponent<Pmovement>().inTask = false;
+        //        _visable.alpha = 0;
+        //        _visable.interactable = false;
+        //        leftTask = true;
+        //    }
+
+        //}
+        
     }
 }

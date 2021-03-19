@@ -39,7 +39,8 @@ public class Interact : NetworkBehaviour
 
     private void Update()
     {
-        if (interact && Input.GetKeyDown(KeyCode.E) && isLocalPlayer && _task.GetComponent<Whoisusing>().user == null) {
+
+        if (interact && Input.GetKeyDown(KeyCode.E) && isLocalPlayer && (_task.GetComponent<Whoisusing>().user == this.gameObject || _task.GetComponent<Whoisusing>().user == null)) {
             PlayJob();
         }
     }

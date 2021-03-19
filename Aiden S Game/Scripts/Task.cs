@@ -12,9 +12,13 @@ public class Task : NetworkBehaviour
     public void Use(bool isActive, GameObject U) {
 
         this.GetComponent<Whoisusing>().UpdateUser(U);
-        Debug.Log(this.GetComponent<Whoisusing>().user.name);
-        _taskWindow.SetActive(isActive);
+        if (_taskWindow != null && _taskWindow.activeSelf) {
+            _taskWindow.GetComponentInChildren<TaskUtil>().MakeVisable();
+            _taskWindow.GetComponentInChildren<TaskUtil>().MakeUseable();
+        }
+        else {
+            _taskWindow.SetActive(isActive);
+        }
         
-
     }
 }
