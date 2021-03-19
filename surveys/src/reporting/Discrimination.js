@@ -22,7 +22,30 @@ class Discrimination extends Component{
                 <React.Fragment>
                     <h2>Is your incident related to any kind of discrimination 
                         <span>which can include but is not limited to:</span></h2>
-                    <li> *discimination stuff*</li>
+                    <div className = "block">
+                    <div className = "block1">
+                    <li>Accommodation request </li>
+                    <li>Age</li>
+                    <li>Childcare/eldercare</li>
+                    <li>Disability</li>
+                    <li>Employee Relations</li>
+                    <li>Ethnicity</li>
+                    <li>Gender</li>
+                    <li>Gender identity or expression</li>
+                    <li>General climate</li>
+                    </div>
+                    <div className = "block2">
+                    <li>Marital/family status</li>
+                    <li>National origin</li>
+                    <li>Pregnancy/family responsibilities</li>
+                    <li>Race/color</li>
+                    <li>Religion/creed</li>
+                    <li>Retaliation</li>
+                    <li>Sexual orientation</li>
+                    <li>Veteran status</li>
+                    <li>Other or not applicable</li>
+                    </div>
+                    </div>
                     <p>(For the university's definition of discrimination, visit https://info.rpi.edu/bart)</p>
                     <br/>
                     <RaisedButton 

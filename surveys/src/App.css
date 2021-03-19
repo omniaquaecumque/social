@@ -32,3 +32,18 @@ li {
 span {
   display: block;
 }
+
+.block {
+  margin-right: 100px;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+.block1 {
+  margin-right: 100px;
+  display: inline-block;
+}
+
+.block2 {
+  display: inline-block;
+}

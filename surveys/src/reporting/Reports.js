@@ -3,6 +3,7 @@ import Discrimination from './Discrimination';
 import OtherReport from './OtherReport';
 import ReportDiscrimination from './ReportDiscrimination';
 import ReportTitleIX from './ReportTitleIX';
+import ReviewReport from './ReviewReport';
 import TitleIX from './TitleIX';
 
 export class Report extends Component{
@@ -16,6 +17,14 @@ export class Report extends Component{
         name: '',
         rin: '',
         info: '',
+        date1: '',
+        time1: '',
+        desc1: '',
+        accuse1: '',
+        witness1: '',
+        name1: '',
+        rin1: '',
+        info1: '',
     }
 
     NextStep = () => {
@@ -47,13 +56,40 @@ export class Report extends Component{
     };
     
     Change = input => e => {
-        this.setState({ [input]: e.target.value})
+        this.setState({ [input]: e.target.value });
     };
+
+    Clear = () => {
+        this.setState({date: '', time: '', desc: '',
+                    accuse: '', witness: '', name: '',
+                    rin: '', info: '', date1: '', time1: '', desc1: '',
+                    accuse1: '', witness1: '', name1: '',
+                    rin1: '', info1: ''})
+    }
+
+    Submit = e =>{
+        if(this.state.date1 == '' || this.state.time1 == '' || this.state.desc1 == ''
+        || this.state.name1 == '' || this.state.rin1 == '' || this.state.info1 == ''){
+            alert(`Please fill out the required fields`)
+        } else {
+            this.setState({
+                date: this.state.date1,
+                time: this.state.time1,
+                desc: this.state.desc1,
+                name: this.state.name1,
+                accuse: this.state.accuse1,
+                witness: this.state.witness1,
+                rin: this.state.rin1,
+                info: this.state.info1,
+            })
+            this.NextStep();
+        }
+    }
 
     render(){
         const {step} = this.state;
-        const {date, time, desc, accuse, witness, name, rin, info} = this.state;
-        const values = {date, time, desc, accuse, witness, name, rin, info};
+        const {date, time, desc, accuse, witness, name, rin, info, time1} = this.state;
+        const values = {date, time, desc, accuse, witness, name, rin, info, time1};
         
         switch (step){
             case 0:
@@ -89,16 +125,27 @@ export class Report extends Component{
                     <OtherReport
                     PrevStep2 = {this.PrevStep2}
                     Change={this.Change}
+                    Clear = {this.Clear}
                     NextStep = {this.NextStep}
+                    Submit = {this.Submit}
                     values={values}
                     />
                 )
             case 5:
                 return(
-                    <h1> SUCCESS! </h1>
+                    <ReviewReport
+                    PrevStep = {this.PrevStep}
+                    Change={this.Change}
+                    NextStep = {this.NextStep}
+                    values={values}
+                    />
+                )
+            case 6:
+                return(
+                    <h1>SUCCESS</h1>
                 )
             default:
-                console.log('this is a certified hood classic');
+                console.log('problem');
         }
     }
 }

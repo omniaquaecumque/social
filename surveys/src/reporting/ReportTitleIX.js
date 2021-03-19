@@ -33,7 +33,7 @@ class ReportTitleIX extends Component{
                         }}
                     />
                     <RaisedButton 
-                        label = "Cancel"
+                        label = "back"
                         style = {styles.button}
                         onClick = {this.continue}
                     />
