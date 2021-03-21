@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: d86adef3c4166b54583bf3d4b563fbb3
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Helonia
+  fontNames:
+  - Helonia
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 10dbf4079e44e9741984eff2e52e8f9c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

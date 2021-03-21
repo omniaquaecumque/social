@@ -29,7 +29,7 @@ public class CarController : MonoBehaviour
 
     void Update() {
         // Fall Detection 
-        if (this.transform.position.y <= -10) {
+        if (this.transform.position.y <= -20) {
             carBody = GetComponent<Rigidbody>();
             this.transform.position = respawnPoint.transform.position;
             this.transform.rotation = Quaternion.Euler(0, 0, 0);
