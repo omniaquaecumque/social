@@ -15,13 +15,21 @@ public class KeyPad : NetworkBehaviour
     bool _isReseting = false;
     public string _cardCode;
 
+    public GameObject _codeGold;
+    public GameObject _codeGreen;
+
+    public Image _Input1;
+    public Image _Input2;
+
+    public Color[] _colors = new Color[2];
+
     //GameObject character;
 
     //public GameObject _mytask;
     
 
     public Text _inputCode;
-    public int _codeLength = 6;
+    public int _codeLength = 8;
 
     //public void MakeVisable() {
     //    _visable.alpha = 1;
@@ -37,9 +45,34 @@ public class KeyPad : NetworkBehaviour
         //this.MakeVisable();
 
         string code = string.Empty;
-        
-        for (int i = 0; i < _codeLength; i++) {
-            code += 1 + i;
+
+        if (Random.Range(0, 2) == 0)
+        {
+            _Input1.color = _colors[0];
+            _Input2.color = _colors[1];
+
+            for (int i = 0; i < _codeGold.GetComponent<KeyPadSubParts>()._codePart.Length; i++)
+            {
+                code += _codeGold.GetComponent<KeyPadSubParts>()._codePart[i];
+            }
+            for (int i = 0; i < _codeGreen.GetComponent<KeyPadSubParts>()._codePart.Length; i++)
+            {
+                code += _codeGreen.GetComponent<KeyPadSubParts>()._codePart[i];
+            }
+        }
+        else {
+            _Input1.color = _colors[1];
+            _Input2.color = _colors[0];
+
+            for (int i = 0; i < _codeGreen.GetComponent<KeyPadSubParts>()._codePart.Length; i++)
+            {
+                code += _codeGreen.GetComponent<KeyPadSubParts>()._codePart[i];
+            }
+            for (int i = 0; i < _codeGold.GetComponent<KeyPadSubParts>()._codePart.Length; i++)
+            {
+                code += _codeGold.GetComponent<KeyPadSubParts>()._codePart[i];
+            }
+
         }
 
         _cardCode = code;

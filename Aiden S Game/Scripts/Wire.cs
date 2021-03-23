@@ -28,6 +28,10 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public bool correct = false;
 
+    public bool attatched = false;
+
+    public Wire attatchedTo = null;
+
     private void Awake()
     {
 
@@ -54,6 +58,10 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     public void Clear() {
         _line.SetPosition(0, Vector3.zero);
         _line.SetPosition(1, Vector3.zero);
+        this.endDrag();
+        this.validPlace = false;
+        this.attatchedTo = null;
+        correct = false;
     }
 
     public Color GetColor() {
@@ -90,6 +98,12 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         }
     }
 
+    public void endDrag()
+    {
+        _DragStart = false;
+        _MatchingJob.CurrentWire = null;
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
 
@@ -102,6 +116,8 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
             _line.SetPosition(0, Vector3.zero);
             _line.SetPosition(1, Vector3.zero);
             validPlace = false;
+            this.attatchedTo.attatched = false;
+            this.attatchedTo = null;
             if (correct) {
                 _MatchingJob.DecrementCorrect();
             }
@@ -121,10 +137,12 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (_MatchingJob.CurrentHovered != null && ((_MatchingJob._P1BottomWires.Contains(_MatchingJob.CurrentWire) && _MatchingJob._P1TopWires.Contains(_MatchingJob.CurrentHovered)) ||(_MatchingJob._P2BottomWires.Contains(_MatchingJob.CurrentWire) && _MatchingJob._P2TopWires.Contains(_MatchingJob.CurrentHovered))))
+        if (_MatchingJob.CurrentHovered != null && ((_MatchingJob._P1BottomWires.Contains(_MatchingJob.CurrentWire) && _MatchingJob._P1TopWires.Contains(_MatchingJob.CurrentHovered)) ||(_MatchingJob._P2BottomWires.Contains(_MatchingJob.CurrentWire) && _MatchingJob._P2TopWires.Contains(_MatchingJob.CurrentHovered))) && _MatchingJob.CurrentHovered.attatched == false)
         {
             correct = _MatchingJob.CompareCorrect();
             validPlace = true;
+            _MatchingJob.CurrentHovered.attatched = true;
+            this.attatchedTo = _MatchingJob.CurrentHovered;
         }
         
         _DragStart = false;
