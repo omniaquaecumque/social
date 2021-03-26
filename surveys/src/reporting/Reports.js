@@ -68,8 +68,8 @@ export class Report extends Component{
     }
 
     Submit = e =>{
-        if(this.state.date1 == '' || this.state.time1 == '' || this.state.desc1 == ''
-        || this.state.name1 == '' || this.state.rin1 == '' || this.state.info1 == ''){
+        if(this.state.date1 === '' || this.state.time1 === '' || this.state.desc1 === ''
+        || this.state.name1 === '' || this.state.rin1 === '' || this.state.info1 === ''){
             alert(`Please fill out the required fields`)
         } else {
             this.setState({
@@ -88,8 +88,9 @@ export class Report extends Component{
 
     render(){
         const {step} = this.state;
-        const {date, time, desc, accuse, witness, name, rin, info, time1} = this.state;
-        const values = {date, time, desc, accuse, witness, name, rin, info, time1};
+        const {date, time, desc, accuse, witness, name, rin, info, date1, time1, desc1, accuse1, witness1, name1, rin1, info1} = this.state;
+        const values = {date, time, desc, accuse, witness,
+             name, rin, info, date1, time1, desc1, accuse1, witness1, name1, rin1, info1};
         
         switch (step){
             case 0:
@@ -127,7 +128,6 @@ export class Report extends Component{
                     Change={this.Change}
                     Clear = {this.Clear}
                     NextStep = {this.NextStep}
-                    Submit = {this.Submit}
                     values={values}
                     />
                 )
@@ -136,7 +136,7 @@ export class Report extends Component{
                     <ReviewReport
                     PrevStep = {this.PrevStep}
                     Change={this.Change}
-                    NextStep = {this.NextStep}
+                    Submit = {this.Submit}
                     values={values}
                     />
                 )

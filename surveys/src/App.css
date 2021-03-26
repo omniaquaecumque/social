@@ -47,3 +47,13 @@ span {
 .block2 {
   display: inline-block;
 }
+
+.confirm {
+  text-align: left;
+  margin-left: 150px;
+}
+
+.info {
+  text-align: left;
+  margin-left: 175px;
+}

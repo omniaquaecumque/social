@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
 
 class OtherReport extends Component{
     back = e => {
@@ -10,10 +9,11 @@ class OtherReport extends Component{
         this.props.PrevStep2();
     }
 
-    submit = e =>{
+    continue = e => {
         e.preventDefault();
-        this.props.Submit();
+        this.props.NextStep();
     }
+
     render(){
         const { values, Change } = this.props;
         return (
@@ -21,23 +21,56 @@ class OtherReport extends Component{
                 <React.Fragment>
                     <h2>Please fill out the following form to the best of your ability</h2>
                     <form ref = "form" className = "form">
-                    <h3>1.)* Date of Incident</h3>
-                    <input type = "text" defaultValue = {values.date} className = "question" onChange={Change('date1')}/>
-                    <h3>2.)* Time of Incident</h3>
-                    <input type = "text" defaultValue = {values.time} className = "question" onChange={Change('time1')}/>
-                    <h3>3.)* Brief Description</h3>
-                    <textarea className = "question" defaultValue = {values.desc} onChange={Change('desc1')} id = "long" ></textarea>
-                    <h3>4.) Name of Accused (if known)</h3>
-                    <input type = "text" defaultValue = {values.accuse} className = "question" onChange={Change('accuse1')}/>
-                    <h3>5.) Witnesses</h3>
-                    <input type = "text" defaultValue = {values.witness} className = "question" onChange={Change('witness1')}/>
-                    <h3>6.)* Name</h3>
-                    <input type = "text" defaultValue = {values.name} className = "question" onChange={Change('name1')}/>
-                    <h3>7.)* RIN</h3>
-                    <input type = "text" defaultValue = {values.rin} className = "question" onChange={Change('rin1')}/>
-                    <h3>8.)* Contact Info</h3>
-                    <input type = "text" defaultValue = {values.info} className = "question" onChange={Change('info1')}/>
-                    </form>
+                    <h3 id = "Qname">1.)* Date of Incident</h3>
+                     <input
+                         onChange={Change('date1')}
+                         defaultValue={values.date1}
+                         className = "question"
+                     />
+                     <h3 id = "Qname">2.)* Time of Incident</h3>
+                     <input
+                         onChange={Change('time1')}
+                         defaultValue={values.time1}
+                         className = "question"
+                     />
+                     <h3 id = "Qname">3.)* Brief Description</h3>
+                     <textarea
+                         onChange={Change('desc1')}
+                         defaultValue={values.desc1}
+                         className = "question"
+                         id = "long"
+                     />
+                     <h3 id = "Qname">4.) Name of Accused (if known)</h3>
+                     <input
+                         onChange={Change('accuse1')}
+                         defaultValue={values.accuse1}
+                         className = "question"
+                     />
+                     <h3 id = "Qname">5.) Witnesses</h3>
+                     <input
+                         onChange={Change('witness1')}
+                         defaultValue={values.witness1}
+                         className = "question"
+                     />
+                     <h3 id = "Qname">6.)* Name</h3>
+                     <input
+                         onChange={Change('name1')}
+                         defaultValue={values.name1}
+                         className = "question"
+                     />
+                     <h3 id = "Qname">7.)* RIN</h3>
+                     <input
+                         onChange={Change('rin1')}
+                         defaultValue={values.rin1}
+                         className = "question"
+                     />
+                     <h3 id = "Qname">8.)* Contact Info</h3>
+                     <input
+                         onChange={Change('info1')}
+                         defaultValue={values.info1}
+                         className = "question"
+                     />
+                     </form>
 
                     <RaisedButton 
                         label = "Back"
@@ -47,7 +80,7 @@ class OtherReport extends Component{
                     <RaisedButton 
                         label = "Submit"
                         style = {styles.button}
-                        onClick={this.submit}
+                        onClick={this.continue}
                     />
                 </React.Fragment>
             </MuiThemeProvider>
