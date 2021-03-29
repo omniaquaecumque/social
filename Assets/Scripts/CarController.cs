@@ -80,6 +80,8 @@ public class CarController : MonoBehaviour
         Vector3 position; 
         Quaternion rotation; 
         c.GetWorldPose(out position, out rotation);
+        // This is for Kart
+        //rotation = rotation * Quaternion.Euler(new Vector3(0, 90, 0));
         t.rotation = rotation; 
         t.position = position; 
     }
