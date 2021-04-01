@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5338180183933896387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5338180183933896446}
+  - component: {fileID: 5338180183933896385}
+  - component: {fileID: 5338180183933896384}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5338180183933896446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338180183933896387}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.585261, y: 10.299276, z: -10.177734}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5338180183933896385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338180183933896387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
+--- !u!114 &5338180183933896384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338180183933896387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d49e48c781eb5043b0c8562d396ba31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _PlayerColors:
+  - {r: 0.3066038, g: 1, b: 0.76357067, a: 1}
+  - {r: 0.19339621, g: 0.5186813, b: 1, a: 1}
+  - {r: 1, g: 0.3066038, b: 0.3066038, a: 1}
+  - {r: 0.7735849, g: 0.25907797, b: 0.5538021, a: 1}
+  _Round1Tasks:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _Round2Tasks:
+  - {fileID: 0}
+  - {fileID: 0}
+  _JobSets:
+  - {fileID: 2650486688693994813, guid: 563090a08247bfe4b9ddc1d68b0e53e6, type: 3}
+  - {fileID: 1904072794229876257, guid: d3bb32b9e35cbde4d98d173706816269, type: 3}
+  - {fileID: 3929947155834008340, guid: 0336e485bdc0efe42b054000163884d8, type: 3}
+  - {fileID: 8756442628229823495, guid: a0b455960d741c242a29d162fec5b50c, type: 3}
+  _indexes: 00000000010000000200000003000000

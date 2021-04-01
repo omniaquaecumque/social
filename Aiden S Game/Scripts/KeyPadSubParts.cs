@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class KeyPadSubParts : NetworkBehaviour
 {
 
+    public int _myNum;
+
     public Text _OutputCode;
     public int _codeLength = 4;
 
@@ -14,7 +16,15 @@ public class KeyPadSubParts : NetworkBehaviour
 
     public int[] _codePart = new int[4];
 
+    public string _MyCode = string.Empty;
+
     bool beenClicked = false;
+
+    public GameObject _GameManager;
+
+    public bool DataSent = false;
+
+    public bool updating = true;
 
 
     private void OnEnable()
@@ -22,18 +32,18 @@ public class KeyPadSubParts : NetworkBehaviour
 
         for (int i = 0; i < _codeLength; i++)
         {
-            _codePart[i] = Random.Range(1, 10);
+            int num = Random.Range(1, 10);
+            _codePart[i] = num;
+            _MyCode += num;
+
         }
         _OutputCode.text = string.Empty;
     }
 
     public void ButtonClick()
     {
-        Debug.Log("Clicked");
-
         if (!beenClicked)
         {
-            Debug.Log("Fell");
             beenClicked = true;
             InvokeRepeating("increaseSlider", 0.5f, 1.0f);
         }
@@ -41,10 +51,8 @@ public class KeyPadSubParts : NetworkBehaviour
     }
 
     public void increaseSlider() {
-        Debug.Log("Invoked");
         if (_slider.value < 1)
         {
-            Debug.Log("Invoked Fell");
             _slider.value += 0.025f;
         }
     }
@@ -68,8 +76,15 @@ public class KeyPadSubParts : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        randomizeout(_slider.value);
-
+        if (!DataSent)
+        {
+            randomizeout(_slider.value);
+            if (_slider.value >= 1) {
+                _GameManager.GetComponent<GameStorage>().AddKeyPadSubpart(_MyCode, _myNum);
+                _GameManager.GetComponent<GameStorage>().TaskComplete(true, _myNum);
+                DataSent = true;
+            }
+        }
+        
     }
 }

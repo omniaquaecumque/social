@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Matching : NetworkBehaviour
 {
+    
+    
     private List<Color> _WireColors;
 
     private List<int> _P1BottomWireIndex;
@@ -17,6 +19,10 @@ public class Matching : NetworkBehaviour
     private List<int> _playerIndex;
 
     private int NumCorrect = 0;
+
+    public int _myInt;
+    
+    public GameObject _GameManager;
 
 
     public GameObject[] _players = new GameObject[3];
@@ -46,21 +52,16 @@ public class Matching : NetworkBehaviour
     public Wire CurrentHovered;
 
     public bool CompareCorrect() {
-        Debug.Log("Comparing Correct");
-        Debug.Log(NumCorrect);
-        
         if (_P1BottomWires.Contains(CurrentWire))
         {
             int index1 = _P1BottomWires.IndexOf(CurrentWire);
             int index2 = _P1TopWires.IndexOf(CurrentHovered);
             if (_correctP1[index1] == index2)
             {
-                Debug.Log("Correct Placement");
                 NumCorrect++;
                 if (NumCorrect == 6) {
                     this.gameObject.GetComponent<TaskUtil>().CompleteTask();
                 }
-                Debug.Log(NumCorrect);
                 return true;
             }
         }
@@ -70,7 +71,6 @@ public class Matching : NetworkBehaviour
             int index2 = _P2TopWires.IndexOf(CurrentHovered);
             if (_correctP2[index1] == index2)
             {
-                Debug.Log("Correct Placement");
                 NumCorrect++;
                 if (NumCorrect == 6)
                 {
@@ -81,7 +81,6 @@ public class Matching : NetworkBehaviour
             }
 
         }
-        Debug.Log("Incorrect Placement");
 
         Debug.Log(NumCorrect);
 
@@ -89,12 +88,8 @@ public class Matching : NetworkBehaviour
     }
 
 
-    public void DecrementCorrect() {
-        Debug.Log("Reducing Correct By 1");
-        
+    public void DecrementCorrect() {     
         NumCorrect--;
-       
-        Debug.Log(NumCorrect);
     }
 
 
@@ -115,19 +110,19 @@ public class Matching : NetworkBehaviour
 
         while (_WireColors.Count > 1 && _P1BottomWireIndex.Count > 0 && _P1TopWireIndex.Count > 0 && _P2TopWireIndex.Count > 0 && _playerIndex.Count > 0) {
 
-            
-            
-            Color pickedColor = _WireColors[Random.Range(0, _WireColors.Count)];
+            int player = Random.Range(0, _playerIndex.Count);
+            Color pickedColor = _GameManager.GetComponent<GameStorage>().DataInputColors[_playerIndex[player]];
+            //Color pickedColor = _WireColors[Random.Range(0, _WireColors.Count)];
             int pickedBottomWireP1 = Random.Range(0, _P1BottomWireIndex.Count);
             int pickedTopWireP1 = Random.Range(0, _P1TopWireIndex.Count);
             int pickedTopWireP2 = Random.Range(0, _P2TopWireIndex.Count);
-            int player = Random.Range(0, _playerIndex.Count);
+            
 
             _correctP1[_P1BottomWireIndex[pickedBottomWireP1]] = _P1TopWireIndex[pickedTopWireP1];
-            _names[_P1TopWireIndex[pickedTopWireP1]].text = _players[_playerIndex[player]].GetComponent<DataInput>().namSubmitted;
+            _names[_P1TopWireIndex[pickedTopWireP1]].text = _GameManager.GetComponent<GameStorage>().DataInputNames[_playerIndex[player]];
 
             _correctP2[_P1TopWireIndex[pickedTopWireP1]] = _P2TopWireIndex[pickedTopWireP2];
-            _majors[_P2TopWireIndex[pickedTopWireP2]].text = _players[_playerIndex[player]].GetComponent<DataInput>().majorSubmitted;
+            _majors[_P2TopWireIndex[pickedTopWireP2]].text = _GameManager.GetComponent<GameStorage>().DataInputMajors[_playerIndex[player]];
 
             _P1BottomWires[_P1BottomWireIndex[pickedBottomWireP1]].SetColor(pickedColor);
             _Playersaw[_P1BottomWireIndex[pickedBottomWireP1]].SetColor(pickedColor);
@@ -157,6 +152,7 @@ public class Matching : NetworkBehaviour
 
         if (NumCorrect == 6)
         {
+            _GameManager.GetComponent<GameStorage>().TaskComplete(true, _myInt);
             this.gameObject.GetComponent<TaskUtil>().CompleteTask();
         }
 

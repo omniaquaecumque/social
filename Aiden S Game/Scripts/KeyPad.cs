@@ -6,11 +6,7 @@ using UnityEngine.UI;
 
 public class KeyPad : NetworkBehaviour
 {
-
-    
-    //public CanvasGroup _visable;
-
-    //bool leftTask = false;
+    public int _myInt;
 
     bool _isReseting = false;
     public string _cardCode;
@@ -23,27 +19,13 @@ public class KeyPad : NetworkBehaviour
 
     public Color[] _colors = new Color[2];
 
-    //GameObject character;
-
-    //public GameObject _mytask;
-    
+    public GameObject _GameManager;
 
     public Text _inputCode;
     public int _codeLength = 8;
 
-    //public void MakeVisable() {
-    //    _visable.alpha = 1;
-    //    _visable.interactable = true;
-    //}
-
-    //public void MakeUseable() {
-    //    leftTask = false;
-    //}
-
     private void OnEnable()
     {
-        //this.MakeVisable();
-
         string code = string.Empty;
 
         if (Random.Range(0, 2) == 0)
@@ -51,27 +33,15 @@ public class KeyPad : NetworkBehaviour
             _Input1.color = _colors[0];
             _Input2.color = _colors[1];
 
-            for (int i = 0; i < _codeGold.GetComponent<KeyPadSubParts>()._codePart.Length; i++)
-            {
-                code += _codeGold.GetComponent<KeyPadSubParts>()._codePart[i];
-            }
-            for (int i = 0; i < _codeGreen.GetComponent<KeyPadSubParts>()._codePart.Length; i++)
-            {
-                code += _codeGreen.GetComponent<KeyPadSubParts>()._codePart[i];
-            }
+            code += _GameManager.GetComponent<GameStorage>().KeyPadSubparts[0];
+            code += _GameManager.GetComponent<GameStorage>().KeyPadSubparts[1];
         }
         else {
             _Input1.color = _colors[1];
             _Input2.color = _colors[0];
-
-            for (int i = 0; i < _codeGreen.GetComponent<KeyPadSubParts>()._codePart.Length; i++)
-            {
-                code += _codeGreen.GetComponent<KeyPadSubParts>()._codePart[i];
-            }
-            for (int i = 0; i < _codeGold.GetComponent<KeyPadSubParts>()._codePart.Length; i++)
-            {
-                code += _codeGold.GetComponent<KeyPadSubParts>()._codePart[i];
-            }
+            
+            code += _GameManager.GetComponent<GameStorage>().KeyPadSubparts[1];
+            code += _GameManager.GetComponent<GameStorage>().KeyPadSubparts[0];
 
         }
 
@@ -90,7 +60,7 @@ public class KeyPad : NetworkBehaviour
         if (_inputCode.text == _cardCode)
         {
             _inputCode.text = "Correct";
-            StartCoroutine(ResetCode());
+            _GameManager.GetComponent<GameStorage>().TaskComplete(true, _myInt);
             this.GetComponent<TaskUtil>().CompleteTask();
             _isReseting = true;
         }
@@ -107,22 +77,8 @@ public class KeyPad : NetworkBehaviour
         _isReseting = false;
     }
 
-  
-
-    // Update is called once per frame
     void Update()
     {
-
-        //if (!leftTask) {
-        //    if (Input.GetKeyDown(KeyCode.Escape))
-        //    {
-        //        character.GetComponent<Pmovement>().inTask = false;
-        //        _visable.alpha = 0;
-        //        _visable.interactable = false;
-        //        leftTask = true;
-        //    }
-
-        //}
         
     }
 }

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class DataInput : NetworkBehaviour
 {
+    public int _myNum;
+    
     public Color[] _colors = new Color[2];
     
     public GameObject _name;
@@ -20,17 +22,26 @@ public class DataInput : NetworkBehaviour
     public string namSubmitted;
     public string majorSubmitted;
 
+    public GameObject _GameManager;
+
 
 
     public void onClickName() {
         if (_name.GetComponent<Text>().text != "")
         {
             namSubmitted = _name.GetComponent<Text>().text;
+            _GameManager.GetComponent<GameStorage>().AddDataInputName(namSubmitted, _myNum);
             _submitName.GetComponent<Image>().color = _colors[1];
+
+            if (_submitMajor.GetComponent<Image>().color == _colors[1])
+            {
+                _GameManager.GetComponent<GameStorage>().TaskComplete(true, _myNum);
+            }
         }
 
         else {
             _submitName.GetComponent<Image>().color = _colors[0];
+            _GameManager.GetComponent<GameStorage>().TaskComplete(false, _myNum);
         }
     
     }
@@ -41,12 +52,19 @@ public class DataInput : NetworkBehaviour
         if (_major.GetComponent<Text>().text != "")
         {
             majorSubmitted = _major.GetComponent<Text>().text;
+            _GameManager.GetComponent<GameStorage>().AddDataInputMajor(majorSubmitted, _myNum);
             _submitMajor.GetComponent<Image>().color = _colors[1];
+
+            if (_submitName.GetComponent<Image>().color == _colors[1]) {
+                _GameManager.GetComponent<GameStorage>().TaskComplete(true, _myNum);
+            }
+
         }
 
         else
         {
             _submitMajor.GetComponent<Image>().color = _colors[0];
+            _GameManager.GetComponent<GameStorage>().TaskComplete(false, _myNum);
         }
 
 

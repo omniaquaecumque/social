@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class JobInfoHolder : NetworkBehaviour
+public class Holder : NetworkBehaviour
 {
-
+    public GameObject theGame;
 }
