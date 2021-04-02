@@ -13,13 +13,13 @@ public class SyncButton : NetworkBehaviour
 
     public void onPress()
     {
-        _syncer.GetComponent<GameStartEnd>().updateButton(_myNum, false);
+        _syncer.GetComponent<GameStartEnd>().updateButton(_myNum, true);
         updateText();
     }
 
     public void onRelease()
     {
-        _syncer.GetComponent<GameStartEnd>().updateButton(_myNum, true);
+        _syncer.GetComponent<GameStartEnd>().updateButton(_myNum, false);
         updateText();
     }
 
