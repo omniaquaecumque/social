@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.UI;
 
 public class OnPlayerBuild : NetworkBehaviour
 {
-    
-    
-    
     private List<Color> avalibleColors;
     //private List<GameObject> avalibleJobs1;
     //private List<GameObject> avalibleJobs2;
@@ -15,7 +13,7 @@ public class OnPlayerBuild : NetworkBehaviour
     //public int T1PlayerTasks;
     //public int T2PlayerTasks;
 
-    private GameObject _GameManager;
+    public GameObject _GameManager;
 
     [SyncVar(hook = nameof(OnJobUpdate))]
     public List<GameObject> _myTasksT1;
@@ -45,13 +43,23 @@ public class OnPlayerBuild : NetworkBehaviour
     {
         _GameManager = GameObject.Find("GameManager");
         _GameManager.GetComponent<GameStorage>().MakePlayer(this.gameObject);
+        string ret = string.Empty;
+        if (isLocalPlayer) {
+            for (int i = 0; i < _myTasksT1.Count; i++) {
+                ret += _myTasksT1[i].name + "\n";
+            }
+            _GameManager.GetComponent<GameStorage>()._HudText.text = ret;
+        }
+
         CmdSetupPlayer(_myColor, _myTasksT1, _completedT1);
     }
 
-    public override void OnStopClient() {
-        GameObject temp = GameObject.Find("GameManager");
-        temp.GetComponent<GameStorage>().AddMissing();
-     }
+    public override void OnStopClient()
+    {
+            GameObject temp = GameObject.Find("GameManager");
+            temp.GetComponent<GameStorage>().AddMissing();
+        
+    }
 
     [Command]
     public void CmdSetupPlayer(Color Pcolor, List<GameObject> tasks, List<bool> complete) {

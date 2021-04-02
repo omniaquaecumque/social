@@ -9,7 +9,15 @@ public class Interact : NetworkBehaviour
 
     GameObject _task;
 
-    
+    GameObject _GenTasks;
+
+    GameObject GameManager;
+
+
+    public override void OnStartLocalPlayer() {
+        _GenTasks = GameObject.Find("GeneralTasks");
+        GameManager = GameObject.Find("GameManager");
+    }
 
     public void OnTriggerEnter(Collider collision)
     {
@@ -39,9 +47,26 @@ public class Interact : NetworkBehaviour
 
     private void Update()
     {
-        if (interact && Input.GetKeyDown(KeyCode.E) && isLocalPlayer && this.GetComponent<OnPlayerBuild>()._myTasksT1.Contains(_task)) {
-            PlayJob();
+
+        if (_task != null && isLocalPlayer) {
+            if (_task.name == "Matching" && (!GameManager.GetComponent<GameStorage>().TasksCompleted[4] || !GameManager.GetComponent<GameStorage>().TasksCompleted[5] || !GameManager.GetComponent<GameStorage>().TasksCompleted[6]))
+            {
+                return;
+            }
+
+            if (_task.name == "KeyPad" && (!GameManager.GetComponent<GameStorage>().TasksCompleted[1] || !GameManager.GetComponent<GameStorage>().TasksCompleted[2]))
+            {
+                return;
+
+            }
+            if (interact && Input.GetKeyDown(KeyCode.E) && isLocalPlayer && (this.GetComponent<OnPlayerBuild>()._myTasksT1.Contains(_task) || _GenTasks.GetComponent<GeneralTasks>()._generalTasks.Contains(_task)))
+            {
+                PlayJob();
+            }
+
+
         }
+       
     }
 
 

@@ -5,7 +5,17 @@ using UnityEngine.UI;
 using Mirror;
 
 public class GameStorage : NetworkBehaviour
-{
+{   
+    [SyncVar]
+    public bool timerStart;
+
+    [SyncVar]
+    public int time;
+
+    public Text _TimeText;
+
+    public Text _HudText;
+    
     public List<Color> _PlayerColors;
     public List<GameObject> _Round1Tasks = new List<GameObject>();
     public List<GameObject> _Round2Tasks = new List<GameObject>();
@@ -26,12 +36,22 @@ public class GameStorage : NetworkBehaviour
 
     public SyncList<bool> TasksCompleted = new SyncList<bool>() { false, false, false, false, false, false, false };
 
+    [SyncVar]
+    public bool Lost;
+
+    [SyncVar]
+    public bool Won;
+
+    public bool firstWinLose = false;
+
+    public GameObject YouLose;
+
+    public GameObject YouWin;
+
 
     [Command(ignoreAuthority = true)]
     public void AddDataInputColor(Color color, int myInt) {
         DataInputColors[myInt] = color;
-
-
     }
 
     [Command(ignoreAuthority = true)]
@@ -76,7 +96,7 @@ public class GameStorage : NetworkBehaviour
     }
     [Command(ignoreAuthority = true)]
     public void AddMissing() {
-        
+        Debug.Log("Missing");
         GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
 
         List<int> curPlayers = new List<int>();
@@ -86,9 +106,8 @@ public class GameStorage : NetworkBehaviour
         }
 
         for (int i = 0; i < activePlayers.Count; i++) {
-            if (!curPlayers.Contains(activePlayers[i])) {
+            if (!curPlayers.Contains(activePlayers[i]) && !_indexes.Contains(i)) {
                 IndexesAdd(i);
-                break;
             }
         }
     
@@ -114,6 +133,40 @@ public class GameStorage : NetworkBehaviour
         RemoveInt(listindex);
     }
 
+
+    private void Update()
+    {
+
+        if (firstWinLose == false)
+        {
+            if (Lost == true)
+            {
+                YouLose.SetActive(true);
+                firstWinLose = true;
+            }
+            if (Won == true) {
+                YouWin.SetActive(true);
+            
+            }
+
+        }
+
+
+        if (timerStart)
+        {
+            int div = time / 60;
+            int sec = time - div * 60;
+
+            if (sec < 10)
+            {
+                _TimeText.text = div + ":0" + sec;
+                return;
+            }
+            _TimeText.text = div + ":" + sec;
+        }
+
+        
+    }
 
 
 

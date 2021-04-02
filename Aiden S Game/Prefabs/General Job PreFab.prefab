@@ -94,7 +94,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  _DataInputTask: 0
+  _MyNum: 0
   user: {fileID: 0}
+  _Gamemanager: {fileID: 0}
 --- !u!114 &848666293866868674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +142,7 @@ Transform:
   m_GameObject: {fileID: 7145897050121951583}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.53, y: 13.49, z: -0.29492188}
-  m_LocalScale: {x: 0.4315529, y: 0.45185566, z: 1}
+  m_LocalScale: {x: 0.24, y: 0.48, z: 1}
   m_Children:
   - {fileID: 5141464152529985062}
   m_Father: {fileID: 0}

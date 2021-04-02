@@ -74,9 +74,9 @@ public class Matching : NetworkBehaviour
                 NumCorrect++;
                 if (NumCorrect == 6)
                 {
+                    _GameManager.GetComponent<GameStorage>().TaskComplete(true, _myInt);
                     this.gameObject.GetComponent<TaskUtil>().CompleteTask();
                 }
-                Debug.Log(NumCorrect);
                 return true;
             }
 
