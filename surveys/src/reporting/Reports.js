@@ -5,6 +5,7 @@ import ReportDiscrimination from './ReportDiscrimination';
 import ReportTitleIX from './ReportTitleIX';
 import ReviewReport from './ReviewReport';
 import TitleIX from './TitleIX';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 export class Report extends Component{
     state = {
@@ -68,20 +69,24 @@ export class Report extends Component{
     }
 
     Submit = e =>{
+        this.setState({
+            date: this.state.date1,
+            time: this.state.time1,
+            desc: this.state.desc1,
+            name: this.state.name1,
+            accuse: this.state.accuse1,
+            witness: this.state.witness1,
+            rin: this.state.rin1,
+            info: this.state.info1,
+        })
+        this.NextStep();
+    }
+
+    Next = e =>{
         if(this.state.date1 === '' || this.state.time1 === '' || this.state.desc1 === ''
         || this.state.name1 === '' || this.state.rin1 === '' || this.state.info1 === ''){
             alert(`Please fill out the required fields`)
         } else {
-            this.setState({
-                date: this.state.date1,
-                time: this.state.time1,
-                desc: this.state.desc1,
-                name: this.state.name1,
-                accuse: this.state.accuse1,
-                witness: this.state.witness1,
-                rin: this.state.rin1,
-                info: this.state.info1,
-            })
             this.NextStep();
         }
     }
@@ -127,7 +132,7 @@ export class Report extends Component{
                     PrevStep2 = {this.PrevStep2}
                     Change={this.Change}
                     Clear = {this.Clear}
-                    NextStep = {this.NextStep}
+                    NextStep = {this.Next}
                     values={values}
                     />
                 )
