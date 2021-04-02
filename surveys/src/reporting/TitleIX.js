@@ -3,15 +3,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
 
 class TitleIX extends Component{
-    continue = e => {
-        e.preventDefault();
-        this.props.NextStep();
-    }
-    back = e => {
-        e.preventDefault();
-        this.props.PrevStep();
-    }
-
     render(){
         return (
             <MuiThemeProvider>
@@ -22,16 +13,18 @@ class TitleIX extends Component{
                     <li>Stalking</li>
                     <p>(For the university's definition of sexual harrassment, visit https://sexualviolence.rpi.edu)</p>
                     <br/>
+                    <a href = "/report/TitleIX">
                     <RaisedButton 
                         label = "Yes"
                         style = {styles.button}
-                        onClick = {this.back}
                     />
+                    </a>
+                    <a href = "/report/Discrimination">
                     <RaisedButton 
                         label = "No"
                         style = {styles.button}
-                        onClick = {this.continue}
                     />
+                    </a>
                 </React.Fragment>
             </MuiThemeProvider>
         );

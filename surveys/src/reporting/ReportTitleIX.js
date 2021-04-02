@@ -32,11 +32,12 @@ class ReportTitleIX extends Component{
                             window.location.href='https://sexualviolence.rpi.edu/reporting';
                         }}
                     />
+                    <a href = "/report">
                     <RaisedButton 
                         label = "back"
                         style = {styles.button}
-                        onClick = {this.continue}
                     />
+                    </a>
                 </React.Fragment>
             </MuiThemeProvider>
         )

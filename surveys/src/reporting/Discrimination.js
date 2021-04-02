@@ -3,19 +3,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
 
 class Discrimination extends Component{
-    continue1 = e => {
-        e.preventDefault();
-        this.props.NextStep();
-    }
-    continue2 = e => {
-        e.preventDefault();
-        this.props.NextStep2();
-    }
-    back = e => {
-        e.preventDefault();
-        this.props.PrevStep();
-    }
-
     render(){
         return (
             <MuiThemeProvider>
@@ -48,21 +35,24 @@ class Discrimination extends Component{
                     </div>
                     <p>(For the university's definition of discrimination, visit https://info.rpi.edu/bart)</p>
                     <br/>
-                    <RaisedButton 
-                        label = "Back"
-                        style = {styles.button}
-                        onClick = {this.back}
-                    />
+                    <a href = "/report">
+                        <RaisedButton 
+                            label = "Back"
+                            style = {styles.button}
+                        />
+                    </a>
+                    <a href = "/report/BART">
                     <RaisedButton 
                         label = "Yes"
                         style = {styles.button}
-                        onClick = {this.continue1}
                     />
+                    </a>
+                    <a href = "/report/SocialReport">
                     <RaisedButton 
                         label = "No"
                         style = {styles.button}
-                        onClick = {this.continue2}
                     />
+                    </a>
                 </React.Fragment>
             </MuiThemeProvider>
         );

@@ -3,10 +3,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
 
 class ReportDiscrimination extends Component{
-    back = e => {
-        e.preventDefault();
-        this.props.PrevStep();
-    }
     render(){
         return(
             <MuiThemeProvider>
@@ -27,11 +23,13 @@ class ReportDiscrimination extends Component{
                             window.location.href='https://cm.maxient.com/reportingform.php?RensselaerPolyInst&layout_id=11';
                         }}
                     />
+                    <a href = "/report/Discrimination">
                     <RaisedButton 
                         label = "Cancel"
                         style = {styles.button}
                         onClick = {this.back}
                     />
+                    </a>
                 </React.Fragment>
             </MuiThemeProvider>
         )
