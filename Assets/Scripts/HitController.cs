@@ -31,7 +31,7 @@ public class HitController : MonoBehaviour
             pushForce = pushForce - Time.deltaTime * delta;
             pushForce = pushForce < 0 ? 0 : pushForce;
 			
-			rb.AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0)); //Add gravity
+			rb.AddForce(new Vector3(0, gravity * GetComponent<Rigidbody>().mass, 0)); //Add gravity
 		}
 	}
 
