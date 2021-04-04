@@ -7,47 +7,59 @@ public class lightControl : NetworkBehaviour
 {
     public GameObject blue, red, yellow, green;
     // Start is called before the first frame update
-    void Start()
+    public override void OnStartServer()
     {
         red.GetComponentInChildren<Light>().intensity = 0;
         blue.GetComponentInChildren<Light>().intensity = 0;
-        yellow.GetComponentInChildren<Light>().intensity = 0;
         green.GetComponentInChildren<Light>().intensity = 0;
+        yellow.GetComponentInChildren<Light>().intensity = 0;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            red.GetComponentInChildren<Light>().intensity = 2;
+            RpcLight(red);
         }
         else if (Input.GetKeyUp(KeyCode.O))
         {
-            red.GetComponentInChildren<Light>().intensity = 0;
+            RpcLightOff(red);
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            blue.GetComponentInChildren<Light>().intensity = 2;
+            RpcLight(blue);
         }
         else if (Input.GetKeyUp(KeyCode.P))
         {
-            blue.GetComponentInChildren<Light>().intensity = 0;
+            RpcLightOff(blue);
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
-            yellow.GetComponentInChildren<Light>().intensity = 2;
+            RpcLight(yellow);
         }
         else if (Input.GetKeyUp(KeyCode.K))
         {
-            yellow.GetComponentInChildren<Light>().intensity = 0;
+            RpcLightOff(yellow);
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            green.GetComponentInChildren<Light>().intensity = 2;
+            RpcLight(green);
         }
         else if(Input.GetKeyUp(KeyCode.L))
         {
-            green.GetComponentInChildren<Light>().intensity = 0;
+            RpcLightOff(green);
         }
+    }
+
+    [ClientRpc]
+    private void RpcLight(GameObject l)
+    {
+        l.GetComponentInChildren<Light>().intensity = 2;
+    }
+
+    [ClientRpc]
+    private void RpcLightOff(GameObject l)
+    {
+        l.GetComponentInChildren<Light>().intensity = 0;
     }
 }

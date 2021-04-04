@@ -17,9 +17,11 @@ public class PlayerMove : NetworkBehaviour
 
     private Vector3 direction = Vector3.zero;
 
+    [Client]
     // Update is called once per frame
     void Update()
     {
+        if (!hasAuthority) { return; }
         if (isLocalPlayer)
         {
             Move();
@@ -50,12 +52,18 @@ public class PlayerMove : NetworkBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject newBullet;
-            newBullet = Instantiate(bullet, FirePos.position, FirePos.rotation);
-            newBullet.GetComponent<Rigidbody>().velocity = newBullet.transform.forward * bulletSpeed;
-            // Debug.Log("Shoot");
-            Destroy(newBullet, 3f);
+            spawnBullet();
         }
     }
 
+    [Command]
+    private void spawnBullet()
+    {
+        GameObject newBullet;
+        newBullet = Instantiate(bullet, FirePos.position, FirePos.rotation);
+        NetworkServer.Spawn(newBullet);
+        newBullet.GetComponent<Rigidbody>().velocity = newBullet.transform.forward * bulletSpeed;
+        // Debug.Log("Shoot");
+        Destroy(newBullet, 3f);
+    }
 }

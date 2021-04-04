@@ -1,22 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class AssignHidden : MonoBehaviour
+public class AssignHidden : NetworkBehaviour
 {
+    //[SerializeField] private GameObject[] hiddens = new GameObject[4];
+    //[SerializeField] private Transform[] spawnPos = new Transform[4];
     private ArrayList Hides = new ArrayList();
     // Start is called before the first frame update
-    void Start()
+    public override void OnStartServer()
+    {
+        Assign();
+    }
+
+    [ServerCallback]
+    private void Assign()
     {
         foreach (Transform child in transform)
         {
             Hides.Add(child);
+            NetworkServer.Spawn(child.gameObject);
             // Debug.Log(child.gameObject.name);
         }
-        int select = Random.Range(0, Hides.Count - 1);
+        int select = Random.Range(0, Hides.Count);
         GameObject choosen = ((Transform)Hides[select]).gameObject;
-        choosen.tag = "Hidden";
-        choosen.AddComponent<hiddenBeh>();
-        Debug.Log(choosen.name + "is hidden.");
+        RpcTag(choosen);
+    }
+
+    [ClientRpc]
+    private void RpcTag(GameObject a)
+    {
+        a.tag = "Hidden";
     }
 }
