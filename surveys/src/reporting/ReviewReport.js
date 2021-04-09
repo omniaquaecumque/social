@@ -14,7 +14,7 @@ class ReviewReport extends Component{
     }
 
     render(){
-        const { values, Change } = this.props;
+        const { values } = this.props;
         return (
             <MuiThemeProvider>
                 <h1>Confirm Your Information</h1>

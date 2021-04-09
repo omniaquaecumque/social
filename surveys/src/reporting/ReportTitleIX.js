@@ -3,10 +3,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
 
 class ReportTitleIX extends Component{
-    continue = e => {
-        e.preventDefault();
-        this.props.NextStep();
-    }
     render(){
         return(
             <MuiThemeProvider>

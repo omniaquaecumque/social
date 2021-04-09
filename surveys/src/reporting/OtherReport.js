@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import ReviewReport from './ReviewReport';
-import Discrimination from './Discrimination';
-import { Prompt } from 'react-router'
 
 class OtherReport extends Component{
+    /* 
+    How this works is that there are a bunch of temporary variables
+    date1 to info1 that are updated automatically on this form.
+    When we hit submit, it moves the temp variables into the actual variables
+    */
     state = {
-        step: 1,
+        step: 1, //indexes the page number essentially
         date: '',
         time: '',
         desc: '',
@@ -40,11 +43,13 @@ class OtherReport extends Component{
         });
     };
 
+    //so that the temp vars automatically update
     Change = input => e => {
         e.preventDefault();
         this.setState({ [input]: e.target.value });
     };
 
+    //submits the temp variables into the actual variables
     Submit = e =>{
         this.setState({
             date: this.state.date1,
@@ -55,10 +60,20 @@ class OtherReport extends Component{
             witness: this.state.witness1,
             rin: this.state.rin1,
             info: this.state.info1,
+            //clears the temp variables too
+            date1: '',
+            time1: '',
+            desc1: '',
+            accuse1: '',
+            witness1: '',
+            name1: '',
+            rin1: '',
+            info1: '',
         })
         this.NextStep();
     }
 
+    //prevents us from moving forward w/o filling in required fields
     Next = e =>{
         e.preventDefault();
         if(this.state.date1 === '' || this.state.time1 === '' || this.state.desc1 === ''
@@ -69,15 +84,19 @@ class OtherReport extends Component{
         }
     }
 
-    
-
-    MyComponent = () => (
-    <React.Fragment>
-        <Prompt
-        message='You have unsaved changes, are you sure you want to leave?'
-        />
-    </React.Fragment>
-    )
+    //asks if we want to move back
+    navigateToPage = () => {
+        if(this.state.date1 !== '' || this.state.time1 !== '' || this.state.desc1 !== ''
+        || this.state.name1 !== '' || this.state.rin1 !== '' || this.state.info1 !== ''){
+            var answer = window.confirm("Are you sure you want to go back? You will lose all your progress if you do.");
+            if (answer) {
+                this.props.history.push('/report/Discrimination');
+            }
+        } else {
+            this.props.history.push('/report/Discrimination');
+        }
+        
+      };
 
     render(){
         const {step} = this.state;
@@ -141,10 +160,11 @@ class OtherReport extends Component{
                                  className = "question"
                              />
                              </form>
+
                             <RaisedButton 
                                 label = "Back"
                                 style = {styles.button}
-                                onClick = {this.MyComponent}
+                                onClick = {this.navigateToPage}
                             />
                             <RaisedButton 
                                 label = "Submit"
