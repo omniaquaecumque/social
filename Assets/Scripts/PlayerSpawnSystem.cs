@@ -9,6 +9,7 @@ using System;
 
 public class PlayerSpawnSystem : NetworkBehaviour
 {
+    private int spawned = 0;
     [SerializeField] private GameObject playerPrefab = null;
 
     private static List<Transform> spawnPoints = new List<Transform>();
@@ -40,6 +41,14 @@ public class PlayerSpawnSystem : NetworkBehaviour
         }
 
         GameObject playerInstance = Instantiate(playerPrefab, spawnPoints[nextIndex].position, spawnPoints[nextIndex].rotation);
+        if (spawned == 0) {
+            playerInstance.transform.GetChild(1).gameObject.layer = 9;
+            spawned += 1;
+        } 
+        else if (spawned == 1) {
+            playerInstance.transform.GetChild(1).gameObject.layer = 10;
+            spawned += 1;            
+        }
         NetworkServer.Spawn(playerInstance, conn);
 
         nextIndex++;
