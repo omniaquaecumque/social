@@ -15,15 +15,17 @@ public class GameStorage : NetworkBehaviour
     public Text _TimeText;
 
     public Text _HudText;
-    
+
     public List<Color> _PlayerColors;
+
     public List<GameObject> _Round1Tasks = new List<GameObject>();
+
     public List<GameObject> _Round2Tasks = new List<GameObject>();
 
     public JobSet[] _JobSets  = new JobSet[4];
 
     public SyncList<int> _indexes = new SyncList<int>{0, 1, 2, 3};
-    
+
     public SyncList<int> activePlayers = new SyncList<int>();
 
     public SyncList<Color> DataInputColors = new SyncList<Color>() { Color.white, Color.white, Color.white };
@@ -89,35 +91,51 @@ public class GameStorage : NetworkBehaviour
         AddInt(remove);
 
     }
+
     [Command(ignoreAuthority = true)]
     public void AddInt(int add) {
-
         activePlayers.Add(add);
     }
+
     [Command(ignoreAuthority = true)]
-    public void AddMissing() {
-        Debug.Log("Missing");
+    public void AddMissing(float delayTime) {
+        StartCoroutine(waitAddMissing(delayTime));
+    
+    }
+
+    //on client disconnect add back in the index that the player used
+    IEnumerator waitAddMissing(float delayTime) {
+
+        yield return new WaitForSeconds(delayTime);
+
         GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
 
         List<int> curPlayers = new List<int>();
 
+
         for (int i = 0; i < Players.Length; i++) {
-            curPlayers.Add(Players[i].GetComponent<OnPlayerBuild>()._myInt);
+            if(Players[i] != null) {
+                curPlayers.Add(Players[i].GetComponent<OnPlayerBuild>()._myInt);
+            }
+            
         }
 
         for (int i = 0; i < activePlayers.Count; i++) {
-            if (!curPlayers.Contains(activePlayers[i]) && !_indexes.Contains(i)) {
-                IndexesAdd(i);
+            if (!curPlayers.Contains(activePlayers[i])) {
+                IndexesAdd(activePlayers[i]);
             }
         }
     
     }
 
-    public void MakePlayer(GameObject player) {
 
+    public void MakePlayer(GameObject player) {
+        //choose index
         int setIndex = Random.Range(0, _indexes.Count);
         int listindex = _indexes[setIndex];
 
+
+        //build player based on the jobset
         player.GetComponent<OnPlayerBuild>()._myInt = listindex;
 
         player.GetComponent<OnPlayerBuild>()._myColor = _PlayerColors[listindex];
@@ -137,6 +155,7 @@ public class GameStorage : NetworkBehaviour
     private void Update()
     {
 
+        //check for a win/loss
         if (firstWinLose == false)
         {
             if (Lost == true)
@@ -151,7 +170,7 @@ public class GameStorage : NetworkBehaviour
 
         }
 
-
+        //update the timer
         if (timerStart)
         {
             int div = time / 60;

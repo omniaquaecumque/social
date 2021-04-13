@@ -7,24 +7,19 @@ using UnityEngine.UI;
 public class OnPlayerBuild : NetworkBehaviour
 {
     private List<Color> avalibleColors;
-    //private List<GameObject> avalibleJobs1;
-    //private List<GameObject> avalibleJobs2;
-
-    //public int T1PlayerTasks;
-    //public int T2PlayerTasks;
 
     public GameObject _GameManager;
 
     [SyncVar(hook = nameof(OnJobUpdate))]
     public List<GameObject> _myTasksT1;
-    //private List<GameObject> _myTasksT2;
+
     [SyncVar(hook = nameof(OnJobBoolUpdate))]
     public List<bool> _completedT1;
-    //private List<bool> _completedT2;
 
     [SyncVar(hook = nameof(OnColorUpdate))]
     public Color _myColor;
 
+    [SyncVar]
     public int _myInt;
 
     void OnColorUpdate(Color oldColor, Color newColor) {
@@ -39,10 +34,14 @@ public class OnPlayerBuild : NetworkBehaviour
         _completedT1 = new List<bool>(newList);
     }
 
+
     public override void OnStartLocalPlayer()
     {
         _GameManager = GameObject.Find("GameManager");
         _GameManager.GetComponent<GameStorage>().MakePlayer(this.gameObject);
+
+
+        //set hud text for owned tasks
         string ret = string.Empty;
         if (isLocalPlayer) {
             for (int i = 0; i < _myTasksT1.Count; i++) {
@@ -51,21 +50,31 @@ public class OnPlayerBuild : NetworkBehaviour
             _GameManager.GetComponent<GameStorage>()._HudText.text = ret;
         }
 
-        CmdSetupPlayer(_myColor, _myTasksT1, _completedT1);
+        //send player data to server
+        CmdSetupPlayer(_myColor, _myTasksT1, _completedT1, _myInt);
     }
-
-    public override void OnStopClient()
-    {
-            GameObject temp = GameObject.Find("GameManager");
-            temp.GetComponent<GameStorage>().AddMissing();
-        
-    }
-
+    
+    //setup new player on the server
     [Command]
-    public void CmdSetupPlayer(Color Pcolor, List<GameObject> tasks, List<bool> complete) {
+    public void CmdSetupPlayer(Color Pcolor, List<GameObject> tasks, List<bool> complete, int newint) {
         _myColor = Pcolor;
         _myTasksT1 = new List<GameObject>(tasks);
         _completedT1 = new List<bool>(complete);
+        _myInt = newint;
+    }
+
+
+    //if client disconnects send player data back to the pool of avalible players
+    public override void OnStopClient()
+    {
+        if (this != null)
+        {
+            GameObject temp = GameObject.Find("GameManager");
+            if(temp != null) {
+                temp.GetComponent<GameStorage>().AddMissing(2f);
+            }
+            
+        }
     }
 
 }

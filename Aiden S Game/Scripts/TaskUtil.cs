@@ -16,12 +16,14 @@ public class TaskUtil : MonoBehaviour
         _character = _mytask.GetComponent<Whoisusing>().user;
     }
 
+    //script to make task visable
     public void MakeVisable()
     {
         _visable.alpha = 1;
         _visable.interactable = true;
         _visable.blocksRaycasts = true;
     }
+
 
     public void MakeUseable()
     {
@@ -39,6 +41,7 @@ public class TaskUtil : MonoBehaviour
     {
         if (!_leftTask)
         {
+            //quit task
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 _character.GetComponent<Pmovement>().inTask = false;

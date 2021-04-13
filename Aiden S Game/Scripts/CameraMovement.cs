@@ -12,21 +12,27 @@ public class CameraMovement : NetworkBehaviour
     {
 
         var zoomSpeed = 15f;
+
+        //set z bound on zoom (-50 away, or -5 close)
         if ((CameraLocation.transform.position.z == -50 && Mathf.Sign(Input.GetAxis("Mouse ScrollWheel")) == -1f) || (CameraLocation.transform.position.z == -5 && Mathf.Sign(Input.GetAxis("Mouse ScrollWheel")) == 1f))
         {
             return;
         }
 
+        //bound on z, scroll to exactly -50
         if (CameraLocation.transform.position.z + (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed) < -50)
         {
             CameraLocation.transform.Translate(0, 0, -50 - CameraLocation.transform.position.z);
             return;
         }
+        //bound on z, scroll to exactly -5
         else if (CameraLocation.transform.position.z + (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed) > -5)
         {
             CameraLocation.transform.Translate(0, 0, -5 - CameraLocation.transform.position.z);
             return;
         }
+
+        //zoom based on scroll amount
         CameraLocation.transform.Translate(0, 0, Input.GetAxis("Mouse ScrollWheel") * zoomSpeed);
 
     }
@@ -43,7 +49,7 @@ public class CameraMovement : NetworkBehaviour
 
     private void Update()
     {
-
+        //if not in task allow zoom
         if (!this.GetComponent<Pmovement>().inTask) { CameraZoom(); }
        
     }

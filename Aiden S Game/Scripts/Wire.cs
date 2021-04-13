@@ -32,15 +32,15 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public Wire attatchedTo = null;
 
-    private void Awake()
-    {
 
-        
+    private void Awake()
+    {    
         _image = GetComponent<Image>();
 
         _line = GetComponent<LineRenderer>();
         _canvas = GetComponentInParent<Canvas>();
 
+        //All top wires are yellow 
         if (topwire)
         {
             this.SetColor(defaultwire);
@@ -70,6 +70,7 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     private void Update()
     {
+        //click and drag
         if (_DragStart)
         {
             Vector2 movePos;
@@ -84,6 +85,7 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
             _line.SetPosition(1, _canvas.transform.TransformPoint(movePos));
         }
         else {
+            //if invalid location, clear line
             if (!validPlace) {
                 _line.SetPosition(0, Vector3.zero);
                 _line.SetPosition(1, Vector3.zero);
@@ -103,7 +105,8 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         _DragStart = false;
         _MatchingJob.CurrentWire = null;
     }
-
+    
+    //needed for lineRenderer don't delete
     public void OnDrag(PointerEventData eventData)
     {
 
@@ -111,6 +114,7 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        //reset wire if already placed
         if (validPlace == true)
         {
             _line.SetPosition(0, Vector3.zero);
@@ -124,11 +128,12 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
             return;
         }
         
+        //start drag if valid drag wire
         if (bottomwire) { 
             _DragStart = true;
-
             _MatchingJob.CurrentWire = this;
         }
+
         else {
             return;
         }
@@ -137,6 +142,7 @@ public class Wire : NetworkBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        //if endpoint is valid (connection is within the same set of wires or the currently hovered wire isn't already connected to another wire) attach the wire
         if (_MatchingJob.CurrentHovered != null && ((_MatchingJob._P1BottomWires.Contains(_MatchingJob.CurrentWire) && _MatchingJob._P1TopWires.Contains(_MatchingJob.CurrentHovered)) ||(_MatchingJob._P2BottomWires.Contains(_MatchingJob.CurrentWire) && _MatchingJob._P2TopWires.Contains(_MatchingJob.CurrentHovered))) && _MatchingJob.CurrentHovered.attatched == false)
         {
             correct = _MatchingJob.CompareCorrect();

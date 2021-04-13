@@ -11,15 +11,21 @@ public class SyncButton : NetworkBehaviour
 
     public GameObject _syncer;
 
+    public AudioSource press;
+
+    public AudioSource release;
+
     public void onPress()
     {
-        _syncer.GetComponent<GameStartEnd>().updateButton(_myNum, true);
+        press.Play();
+        _syncer.GetComponent<GameStartEnd>().updateButton(_myNum, false);
         updateText();
     }
 
     public void onRelease()
     {
-        _syncer.GetComponent<GameStartEnd>().updateButton(_myNum, false);
+        release.Play();
+        _syncer.GetComponent<GameStartEnd>().updateButton(_myNum, true);
         updateText();
     }
 

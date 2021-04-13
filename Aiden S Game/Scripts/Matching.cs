@@ -51,7 +51,10 @@ public class Matching : NetworkBehaviour
 
     public Wire CurrentHovered;
 
+
+    //Update the number of correctly placed wires (called when wire is attached) returns true if all 6 wires are placed correctly
     public bool CompareCorrect() {
+        //if the placed wire was in the bottom set of wires
         if (_P1BottomWires.Contains(CurrentWire))
         {
             int index1 = _P1BottomWires.IndexOf(CurrentWire);
@@ -60,6 +63,7 @@ public class Matching : NetworkBehaviour
             {
                 NumCorrect++;
                 if (NumCorrect == 6) {
+                    _GameManager.GetComponent<GameStorage>().TaskComplete(true, _myInt);
                     this.gameObject.GetComponent<TaskUtil>().CompleteTask();
                 }
                 return true;
@@ -67,6 +71,7 @@ public class Matching : NetworkBehaviour
         }
         else
         {
+            //if the placed wire was in the top set of wires
             int index1 = _P2BottomWires.IndexOf(CurrentWire);
             int index2 = _P2TopWires.IndexOf(CurrentHovered);
             if (_correctP2[index1] == index2)
@@ -81,9 +86,6 @@ public class Matching : NetworkBehaviour
             }
 
         }
-
-        Debug.Log(NumCorrect);
-
         return false;
     }
 
@@ -95,6 +97,8 @@ public class Matching : NetworkBehaviour
 
     private void Start()
     {
+
+        //intilize lists
         _WireColors = new List<Color>(_PlayerColors);
         _P1BottomWireIndex = new List<int>();
         _P1TopWireIndex = new List<int>();
@@ -108,26 +112,31 @@ public class Matching : NetworkBehaviour
             _playerIndex.Add(i);
         }
 
+
+        //matching assignment
         while (_WireColors.Count > 1 && _P1BottomWireIndex.Count > 0 && _P1TopWireIndex.Count > 0 && _P2TopWireIndex.Count > 0 && _playerIndex.Count > 0) {
 
             int player = Random.Range(0, _playerIndex.Count);
             Color pickedColor = _GameManager.GetComponent<GameStorage>().DataInputColors[_playerIndex[player]];
-            //Color pickedColor = _WireColors[Random.Range(0, _WireColors.Count)];
+
             int pickedBottomWireP1 = Random.Range(0, _P1BottomWireIndex.Count);
             int pickedTopWireP1 = Random.Range(0, _P1TopWireIndex.Count);
             int pickedTopWireP2 = Random.Range(0, _P2TopWireIndex.Count);
             
-
+            //assign bottom set wire and place name
             _correctP1[_P1BottomWireIndex[pickedBottomWireP1]] = _P1TopWireIndex[pickedTopWireP1];
             _names[_P1TopWireIndex[pickedTopWireP1]].text = _GameManager.GetComponent<GameStorage>().DataInputNames[_playerIndex[player]];
 
+            //assign top set wire and place major
             _correctP2[_P1TopWireIndex[pickedTopWireP1]] = _P2TopWireIndex[pickedTopWireP2];
             _majors[_P2TopWireIndex[pickedTopWireP2]].text = _GameManager.GetComponent<GameStorage>().DataInputMajors[_playerIndex[player]];
 
+            //set wire color 
             _P1BottomWires[_P1BottomWireIndex[pickedBottomWireP1]].SetColor(pickedColor);
+            //set player icon color
             _Playersaw[_P1BottomWireIndex[pickedBottomWireP1]].SetColor(pickedColor);
 
-
+            //remove set index for random selection
             _playerIndex.Remove(_playerIndex[player]);
             _WireColors.Remove(pickedColor);
             _P1BottomWireIndex.Remove(_P1BottomWireIndex[pickedBottomWireP1]);
@@ -149,13 +158,8 @@ public class Matching : NetworkBehaviour
     }
     void Update()
     {
-
-        if (NumCorrect == 6)
-        {
-            _GameManager.GetComponent<GameStorage>().TaskComplete(true, _myInt);
-            this.gameObject.GetComponent<TaskUtil>().CompleteTask();
-        }
-
+        
+        //if task gets hidden clear all drawn lines
         if (this.gameObject.GetComponent<CanvasGroup>().alpha == 0)
         {
             this.ClearAll();

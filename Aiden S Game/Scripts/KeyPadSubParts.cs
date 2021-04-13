@@ -4,6 +4,9 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
 
+//Kepad Decrypt 
+
+
 public class KeyPadSubParts : NetworkBehaviour
 {
 
@@ -26,10 +29,12 @@ public class KeyPadSubParts : NetworkBehaviour
 
     public bool updating = true;
 
+    public AudioSource sound;
 
+    
     private void OnEnable()
     {
-
+        //fill array and string representation of output code
         for (int i = 0; i < _codeLength; i++)
         {
             int num = Random.Range(1, 10);
@@ -40,8 +45,10 @@ public class KeyPadSubParts : NetworkBehaviour
         _OutputCode.text = string.Empty;
     }
 
+    //on button click
     public void ButtonClick()
     {
+        sound.Play();
         if (!beenClicked)
         {
             beenClicked = true;
@@ -57,6 +64,8 @@ public class KeyPadSubParts : NetworkBehaviour
         }
     }
 
+
+    //As bar fills begin to show correct output on proper bar divisions 
     public void randomizeout(float sliderval) {
         string code = string.Empty;
 
@@ -76,10 +85,14 @@ public class KeyPadSubParts : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if progress bar is not complete
         if (!DataSent)
         {
             randomizeout(_slider.value);
+            
+            //when progress completes send data to the gamemanager and set this task as complete.
             if (_slider.value >= 1) {
+                sound.Stop();
                 _GameManager.GetComponent<GameStorage>().AddKeyPadSubpart(_MyCode, _myNum);
                 _GameManager.GetComponent<GameStorage>().TaskComplete(true, _myNum);
                 DataSent = true;

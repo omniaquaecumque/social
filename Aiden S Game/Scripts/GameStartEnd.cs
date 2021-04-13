@@ -4,6 +4,8 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
 
+
+//Start buttons' syncer
 public class GameStartEnd : NetworkBehaviour
 {
     public GameObject _Gamemanager;
@@ -20,7 +22,7 @@ public class GameStartEnd : NetworkBehaviour
 
     public bool started = false;
 
-
+    //add the walls to the sync list
     public override void OnStartServer()
     {
         for (int i = 0; i < InspectWalls.Count; i++) {
@@ -31,9 +33,14 @@ public class GameStartEnd : NetworkBehaviour
     [Command(ignoreAuthority = true)]
     public void updateButton(int index, bool val) {
         buttonsHeld[index] = val;
+        
+        //if all buttons are activated
         if (allTrue()) {
+            //if the game hasn't started
             if (!started) {
                 started = true;
+                
+                //move the walls out of the way and start the timer
                 for (int i = 0; i < Walls.Count; i++) {
                     Walls[i].transform.Translate(Vector3.forward * 10); 
                 }
@@ -41,6 +48,7 @@ public class GameStartEnd : NetworkBehaviour
                 startTime();
                 return;
             }
+            //if the game has already started then see if players have returned to win
             if (allTasksDone() && !_Gamemanager.GetComponent<GameStorage>().Lost) {
                 EndGame();
             }

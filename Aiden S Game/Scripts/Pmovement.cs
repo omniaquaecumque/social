@@ -5,12 +5,9 @@ using Mirror;
 
 public class Pmovement : NetworkBehaviour
 {
-
-
     public CharacterController controller;
 
     public bool inTask = false;
-
 
     void CharacterMovement() 
     {
@@ -25,6 +22,7 @@ public class Pmovement : NetworkBehaviour
 
     private void Update()
     {
+        //no movement if in task
         if (!inTask) { CharacterMovement(); }
     }
 }

@@ -49,6 +49,8 @@ public class Interact : NetworkBehaviour
     {
 
         if (_task != null && isLocalPlayer) {
+            
+            //special case for build up tasks.  Need to confirm their child tasks are done first
             if (_task.name == "Matching" && (!GameManager.GetComponent<GameStorage>().TasksCompleted[4] || !GameManager.GetComponent<GameStorage>().TasksCompleted[5] || !GameManager.GetComponent<GameStorage>().TasksCompleted[6]))
             {
                 return;
@@ -59,6 +61,8 @@ public class Interact : NetworkBehaviour
                 return;
 
             }
+
+            //confirm that the player has the task or that its a general task
             if (interact && Input.GetKeyDown(KeyCode.E) && isLocalPlayer && (this.GetComponent<OnPlayerBuild>()._myTasksT1.Contains(_task) || _GenTasks.GetComponent<GeneralTasks>()._generalTasks.Contains(_task)))
             {
                 PlayJob();

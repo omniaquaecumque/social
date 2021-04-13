@@ -4,7 +4,7 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
 
-
+//only exists on the server
 public class Timer : NetworkBehaviour
 {
 
@@ -30,23 +30,29 @@ public class Timer : NetworkBehaviour
         }
     }
 
+    //send current time to players
     [ClientRpc]
     public void sendTime() {
         _Gamemanager.GetComponent<GameStorage>().time = _myTime;
     }
 
+    //send that the timer started to players
     [ClientRpc]
     public void timerStarted()
     {
         _Gamemanager.GetComponent<GameStorage>().timerStart = true;
     }
 
+    //if client starts send them the time
     public override void OnStartLocalPlayer()
     {
         sendTime();
     }
 
+    //if timer reaches zero send to the players that they lost
     public void sendLost() {
         _Gamemanager.GetComponent<GameStorage>().Lost = true;
     }
+
+ 
 }

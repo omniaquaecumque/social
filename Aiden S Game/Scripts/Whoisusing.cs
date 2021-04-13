@@ -13,6 +13,8 @@ public class Whoisusing : NetworkBehaviour
 
     public GameObject _Gamemanager;
 
+
+    //save the user who is currently using this task, if the task is the Datainput task save the color as well
     public void UpdateUser(GameObject newuser) {
         user = newuser;
         if (_DataInputTask) { 

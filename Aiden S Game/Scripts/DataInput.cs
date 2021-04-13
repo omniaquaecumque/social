@@ -33,6 +33,7 @@ public class DataInput : NetworkBehaviour
             _GameManager.GetComponent<GameStorage>().AddDataInputName(namSubmitted, _myNum);
             _submitName.GetComponent<Image>().color = _colors[1];
 
+            //complete task if both name and major have had valid inputs
             if (_submitMajor.GetComponent<Image>().color == _colors[1])
             {
                 _GameManager.GetComponent<GameStorage>().TaskComplete(true, _myNum);
@@ -40,6 +41,7 @@ public class DataInput : NetworkBehaviour
         }
 
         else {
+            //set task to incomplete if text field is empty
             _submitName.GetComponent<Image>().color = _colors[0];
             _GameManager.GetComponent<GameStorage>().TaskComplete(false, _myNum);
         }
@@ -55,6 +57,7 @@ public class DataInput : NetworkBehaviour
             _GameManager.GetComponent<GameStorage>().AddDataInputMajor(majorSubmitted, _myNum);
             _submitMajor.GetComponent<Image>().color = _colors[1];
 
+            //complete task if both name and major have had valid inputs
             if (_submitName.GetComponent<Image>().color == _colors[1]) {
                 _GameManager.GetComponent<GameStorage>().TaskComplete(true, _myNum);
             }
@@ -63,23 +66,11 @@ public class DataInput : NetworkBehaviour
 
         else
         {
+            //set task to incomplete if text field is empty
             _submitMajor.GetComponent<Image>().color = _colors[0];
             _GameManager.GetComponent<GameStorage>().TaskComplete(false, _myNum);
         }
 
 
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

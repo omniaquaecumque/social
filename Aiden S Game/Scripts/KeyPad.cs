@@ -28,18 +28,23 @@ public class KeyPad : NetworkBehaviour
     {
         string code = string.Empty;
 
+        //choose which order the keycode is built in
         if (Random.Range(0, 2) == 0)
         {
+            //set colors
             _Input1.color = _colors[0];
             _Input2.color = _colors[1];
 
+            //set code
             code += _GameManager.GetComponent<GameStorage>().KeyPadSubparts[0];
             code += _GameManager.GetComponent<GameStorage>().KeyPadSubparts[1];
         }
         else {
+            //set colors
             _Input1.color = _colors[1];
             _Input2.color = _colors[0];
             
+            //set code
             code += _GameManager.GetComponent<GameStorage>().KeyPadSubparts[1];
             code += _GameManager.GetComponent<GameStorage>().KeyPadSubparts[0];
 
@@ -51,10 +56,11 @@ public class KeyPad : NetworkBehaviour
 
     public void ButtonClick(int number)
     {
-
+        //if reseting don't allow input
         if (_isReseting) {
             return;
         }
+        //otherwise append number to output text
         _inputCode.text += number;
 
         if (_inputCode.text == _cardCode)
@@ -64,6 +70,7 @@ public class KeyPad : NetworkBehaviour
             this.GetComponent<TaskUtil>().CompleteTask();
             _isReseting = true;
         }
+
         else if (_inputCode.text.Length >= _codeLength) {
             _inputCode.text = "Incorrect";
             StartCoroutine(ResetCode());
@@ -77,8 +84,4 @@ public class KeyPad : NetworkBehaviour
         _isReseting = false;
     }
 
-    void Update()
-    {
-        
-    }
 }
