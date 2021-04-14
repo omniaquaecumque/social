@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class KartController : MonoBehaviour
+public class KartController : NetworkBehaviour
 {
-    float horizontal; 
-    float vertical; 
-    float currentBreakForce;
-    float steerAngle; 
-    bool isBreaking;
-    Rigidbody carBody;
+    private float horizontal; 
+    private float vertical; 
+    private float currentBreakForce;
+    private float steerAngle; 
+    private bool isBreaking;
+    [SerializeField] private Rigidbody carBody;
 
     [SerializeField] private Transform respawnPoint;
 
@@ -27,56 +28,53 @@ public class KartController : MonoBehaviour
     [SerializeField] private Transform rearLeftWheelTransform;
     [SerializeField] private Transform rearRightWheelTransform;    
 
-    void Update() {
-        // Fall Detection 
-        if (this.transform.position.y <= -20) {
-            carBody = GetComponent<Rigidbody>();
-            this.transform.position = respawnPoint.transform.position;
-            this.transform.rotation = Quaternion.Euler(0, 0, 0);
-            carBody.velocity = Vector3.zero;                  
-        }
+    public override void OnStartAuthority()
+    {
+        //virtualCamera.gameObject.SetActive(true);
+        enabled = true;
     }
-    void FixedUpdate() {
+
+    public void FixedUpdate() {
         GetInput();
         Drive();
         HandleSteering();
         UpdateWheels();
     }
 
-    void GetInput() {
+    public void GetInput() {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         isBreaking = Input.GetKey(KeyCode.Space);
     }
 
-    void Drive() {
+    public void Drive() {
         frontLeftWheelCollider.motorTorque = vertical * motorForce;
         frontRightWheelCollider.motorTorque = vertical * motorForce;
         currentBreakForce = isBreaking ? breakForce : 0f;
         Break();
     }
 
-    void Break() {
+    public void Break() {
         frontLeftWheelCollider.brakeTorque = currentBreakForce;
         frontRightWheelCollider.brakeTorque = currentBreakForce;
         rearLeftWheelCollider.brakeTorque = currentBreakForce;
         rearRightWheelCollider.brakeTorque = currentBreakForce;
     }
 
-    void HandleSteering() {
+    public void HandleSteering() {
         steerAngle = maxSteerAngle * horizontal;
         frontLeftWheelCollider.steerAngle = steerAngle;
         frontRightWheelCollider.steerAngle = steerAngle;
     }
 
-    void UpdateWheels() {
+    public void UpdateWheels() {
         UpdateSingleWheel(frontLeftWheelCollider, frontLeftWheelTransform);
         UpdateSingleWheel(frontRightWheelCollider, frontRightWheelTransform);
         UpdateSingleWheel(rearLeftWheelCollider, rearLeftWheelTransform);
         UpdateSingleWheel(rearRightWheelCollider, rearRightWheelTransform);
     }
 
-    void UpdateSingleWheel(WheelCollider c, Transform t) {
+    public void UpdateSingleWheel(WheelCollider c, Transform t) {
         Vector3 position; 
         Quaternion rotation; 
         c.GetWorldPose(out position, out rotation);
@@ -85,4 +83,15 @@ public class KartController : MonoBehaviour
         t.rotation = rotation; 
         t.position = position; 
     }
+    
+    /*
+    void Update() {
+        // Fall Detection 
+        if (this.transform.position.y <= -20) {
+            carBody = GetComponent<Rigidbody>();
+            this.transform.position = respawnPoint.transform.position;
+            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+            carBody.velocity = Vector3.zero;                  
+        }
+    }*/    
 }

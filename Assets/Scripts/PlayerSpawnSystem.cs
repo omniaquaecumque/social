@@ -9,7 +9,9 @@ using System;
 
 public class PlayerSpawnSystem : NetworkBehaviour
 {
-    private int spawned = 0;
+    //private int spawned = 0;
+    //private int playerLayer = 9;
+
     [SerializeField] private GameObject playerPrefab = null;
 
     private static List<Transform> spawnPoints = new List<Transform>();
@@ -41,16 +43,42 @@ public class PlayerSpawnSystem : NetworkBehaviour
         }
 
         GameObject playerInstance = Instantiate(playerPrefab, spawnPoints[nextIndex].position, spawnPoints[nextIndex].rotation);
-        if (spawned == 0) {
-            playerInstance.transform.GetChild(1).gameObject.layer = 9;
-            spawned += 1;
-        } 
-        else if (spawned == 1) {
-            playerInstance.transform.GetChild(1).gameObject.layer = 10;
-            spawned += 1;            
+        /*if (spawned == 1) {
+            playerLayer = 10;            
+        }        
+        
+        playerInstance.layer = playerLayer;
+        //playerInstance.transform.GetChild(0).gameObject.layer = 9;
+        GameObject visual = playerInstance.transform.GetChild(0).gameObject;
+        visual.layer = playerLayer;
+        foreach (Transform child in visual.transform) {
+            child.gameObject.layer = playerLayer;
         }
+        GameObject wheels = visual.transform.GetChild(12).gameObject; 
+        foreach (Transform w in wheels.transform) {
+            w.gameObject.layer = playerLayer;
+        }     
+        GameObject wheelTransforms = wheels.transform.GetChild(0).gameObject;     
+        foreach (Transform t in wheelTransforms.transform) {
+            t.gameObject.layer = playerLayer;
+        }       
+        GameObject wheelColliders = wheels.transform.GetChild(1).gameObject; 
+        foreach (Transform c in wheelColliders.transform) {
+            c.gameObject.layer = playerLayer;
+        }                         
+        playerInstance.transform.GetChild(1).gameObject.layer = playerLayer;
+        spawned += 1;
+        */
+    /*
+        GameObject cameraLocation = playerInstance.transform.GetChild(3).gameObject;
+        Transform cameraTransform = Camera.main.gameObject.transform;  
+        cameraTransform.parent = cameraLocation.transform;  
+        cameraTransform.position = cameraLocation.transform.position;  
+        cameraTransform.rotation = cameraLocation.transform.rotation;*/
+        
         NetworkServer.Spawn(playerInstance, conn);
-
+        
         nextIndex++;
     }
+
 }

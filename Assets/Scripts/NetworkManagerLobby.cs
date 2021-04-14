@@ -9,7 +9,7 @@ using System;
 
 public class NetworkManagerLobby : NetworkManager
 {
-    [SerializeField] private int minPlayers = 2;
+    [SerializeField] private int minPlayers = 3;
     [Scene] [SerializeField] private string menuScene = string.Empty;
 
     [Header("Room")]
@@ -33,6 +33,7 @@ public class NetworkManagerLobby : NetworkManager
 
     public override void OnStartClient()
     {
+        
         //spawnPrefabs.Clear();
         spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
         ClientScene.ClearSpawners();
@@ -95,6 +96,7 @@ public class NetworkManagerLobby : NetworkManager
     public override void OnStopServer()
     {
         RoomPlayers.Clear();
+        GamePlayers.Clear();
     }    
 
     public void NotifyPlayersOfReadyState()
