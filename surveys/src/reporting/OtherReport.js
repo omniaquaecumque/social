@@ -87,7 +87,8 @@ class OtherReport extends Component{
     //asks if we want to move back
     navigateToPage = () => {
         if(this.state.date1 !== '' || this.state.time1 !== '' || this.state.desc1 !== ''
-        || this.state.name1 !== '' || this.state.rin1 !== '' || this.state.info1 !== ''){
+        || this.state.name1 !== '' || this.state.rin1 !== '' || this.state.info1 !== ''
+        || this.state.accuse1 !== ''|| this.state.witness1 !== ''){
             var answer = window.confirm("Are you sure you want to go back? You will lose all your progress if you do.");
             if (answer) {
                 this.props.history.push('/report/Discrimination');

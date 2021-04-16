@@ -58,3 +58,12 @@ span {
   text-align: left;
   margin-left: 150px;
 }
+
+.text {
+  font-size: 16px;
+}
+
+.flyer {
+  height: 776px;
+  width: 600px;
+}

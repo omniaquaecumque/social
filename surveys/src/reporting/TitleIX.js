@@ -7,11 +7,11 @@ class TitleIX extends Component{
         return (
             <MuiThemeProvider>
                 <React.Fragment>
-                    <h2>Is your incident related to any of these:</h2>
-                    <li>Sexual Harrassment</li>
-                    <li>Gender Discrimination</li>
-                    <li>Stalking</li>
-                    <p>(For the university's definition of sexual harrassment, visit https://sexualviolence.rpi.edu)</p>
+                    <h3>I may have or I have experienced an incident that involved sexual misconduct.</h3>
+                    <p class = "text">"sexual misconduct includes, but is not limited to:
+                    <span>sexual harassment, sexual assault, dating and domestic violence,</span>
+                    <span>intimate partner violence, and stalking."</span>
+                     - (<a href ="https://sexualviolence.rpi.edu">https://sexualviolence.rpi.edu</a>)</p>
                     <br/>
                     <a href = "/report/TitleIX">
                     <RaisedButton 

@@ -7,9 +7,9 @@ class ReportDiscrimination extends Component{
         return(
             <MuiThemeProvider>
                 <React.Fragment>
-                    <h2>You will be redirected to the RPI Bias Incident Response Team (BART) page.
+                    <h3>You will be redirected to the RPI Bias Incident Response Team (BART) page.
                     <span>In this page you will be filling in the following questions</span>
-                    <span>(* = required question):</span></h2>
+                    <span>(* = required question):</span></h3>
                     <li>*Your info (who is impacted, date/time of incident</li>
                     <li>Involved parties</li>
                     <li>*Incident details</li>

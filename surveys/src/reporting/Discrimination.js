@@ -7,8 +7,8 @@ class Discrimination extends Component{
         return (
             <MuiThemeProvider>
                 <React.Fragment>
-                    <h2>Is your incident related to any kind of discrimination 
-                        <span>which can include but is not limited to:</span></h2>
+                    <h2>I may have or I have been subject to discrimination. Discrimination
+                        <span>can include, but is not limited to:</span></h2>
                     <div className = "block">
                     <div className = "block1">
                     <li>Accommodation request </li>
@@ -33,7 +33,7 @@ class Discrimination extends Component{
                     <li>Other or not applicable</li>
                     </div>
                     </div>
-                    <p>(For the university's definition of discrimination, visit https://info.rpi.edu/bart)</p>
+                    <p>(For the university's definition of discrimination, visit this website: <a href = "https://info.rpi.edu/bart">https://info.rpi.edu/bart</a>)</p>
                     <br/>
                     <a href = "/report">
                         <RaisedButton 
