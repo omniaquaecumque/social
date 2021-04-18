@@ -8,6 +8,7 @@ TagManager:
   - Object
   - Shield
   - Wall
+  - Despawned
   layers:
   - Default
   - TransparentFX

@@ -708,7 +708,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 4874126678125670354, guid: d8114f60a3538324c9146c1485fe6265, type: 3}
   - {fileID: -876546973899608171, guid: d8114f60a3538324c9146c1485fe6265, type: 3}
-  - {fileID: -3846018093981099296, guid: d8114f60a3538324c9146c1485fe6265, type: 3}
+  - {fileID: -6922793697723135513, guid: d8114f60a3538324c9146c1485fe6265, type: 3}
   - {fileID: -6922793697723135513, guid: d8114f60a3538324c9146c1485fe6265, type: 3}
   - {fileID: -6629797300637803691, guid: d8114f60a3538324c9146c1485fe6265, type: 3}
   m_StaticBatchInfo:
@@ -886,6 +886,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0d88221cc8ead4ba9b9eb5eda9df68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  carBody: {fileID: 0}
   respawnPoint: {fileID: 0}
   motorForce: 8000
   breakForce: 15000

@@ -9,7 +9,7 @@ using System;
 
 public class PlayerSpawnSystem : NetworkBehaviour
 {
-    //private int spawned = 0;
+    public int spawned = 3;
     //private int playerLayer = 9;
 
     [SerializeField] private GameObject playerPrefab = null;
@@ -43,39 +43,8 @@ public class PlayerSpawnSystem : NetworkBehaviour
         }
 
         GameObject playerInstance = Instantiate(playerPrefab, spawnPoints[nextIndex].position, spawnPoints[nextIndex].rotation);
-        /*if (spawned == 1) {
-            playerLayer = 10;            
-        }        
-        
-        playerInstance.layer = playerLayer;
-        //playerInstance.transform.GetChild(0).gameObject.layer = 9;
-        GameObject visual = playerInstance.transform.GetChild(0).gameObject;
-        visual.layer = playerLayer;
-        foreach (Transform child in visual.transform) {
-            child.gameObject.layer = playerLayer;
-        }
-        GameObject wheels = visual.transform.GetChild(12).gameObject; 
-        foreach (Transform w in wheels.transform) {
-            w.gameObject.layer = playerLayer;
-        }     
-        GameObject wheelTransforms = wheels.transform.GetChild(0).gameObject;     
-        foreach (Transform t in wheelTransforms.transform) {
-            t.gameObject.layer = playerLayer;
-        }       
-        GameObject wheelColliders = wheels.transform.GetChild(1).gameObject; 
-        foreach (Transform c in wheelColliders.transform) {
-            c.gameObject.layer = playerLayer;
-        }                         
-        playerInstance.transform.GetChild(1).gameObject.layer = playerLayer;
-        spawned += 1;
-        */
-    /*
-        GameObject cameraLocation = playerInstance.transform.GetChild(3).gameObject;
-        Transform cameraTransform = Camera.main.gameObject.transform;  
-        cameraTransform.parent = cameraLocation.transform;  
-        cameraTransform.position = cameraLocation.transform.position;  
-        cameraTransform.rotation = cameraLocation.transform.rotation;*/
-        
+        GameManager.IncrementPlayer();
+        GameManager.RegisterPlayer(playerInstance);
         NetworkServer.Spawn(playerInstance, conn);
         
         nextIndex++;

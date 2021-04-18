@@ -5,6 +5,8 @@ using Mirror;
 
 public class KartController : NetworkBehaviour
 {
+    public GameObject kart; 
+
     private float horizontal; 
     private float vertical; 
     private float currentBreakForce;
@@ -83,15 +85,23 @@ public class KartController : NetworkBehaviour
         t.rotation = rotation; 
         t.position = position; 
     }
-    
-    /*
-    void Update() {
+
+    public void Update() {
+        NetworkIdentity id = gameObject.GetComponent<NetworkIdentity>();
         // Fall Detection 
         if (this.transform.position.y <= -20) {
-            carBody = GetComponent<Rigidbody>();
-            this.transform.position = respawnPoint.transform.position;
-            this.transform.rotation = Quaternion.Euler(0, 0, 0);
-            carBody.velocity = Vector3.zero;                  
+            //carBody = GetComponent<Rigidbody>();
+            //this.transform.position = respawnPoint.transform.position;
+            //this.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //carBody.velocity = Vector3.zero;        
+               
+            //GameManager.sceneCam.SetActive(true);
+            GameManager.DecrementPlayer();  
+            GameManager.players.Remove(kart);
+            NetworkServer.Destroy(gameObject);
+            //kart.SetActive(false);
+            //Destroy(gameObject);
+               
         }
-    }*/    
+    }  
 }
