@@ -17,16 +17,23 @@ public class PlayerMove : NetworkBehaviour
 
     private Vector3 direction = Vector3.zero;
 
-    [Client]
+
+    public override void OnStartClient()
+    {
+        transform.position = new Vector3(35, -5, 15);
+    }
+
+
     // Update is called once per frame
     void Update()
     {
         if (!hasAuthority) { return; }
-        if (isLocalPlayer)
+        if (Input.GetKey(KeyCode.R))
         {
-            Move();
-            Shoot();
+            transform.position = new Vector3(35, -5, 15);
         }
+        Move();
+        Shoot();
     }
 
     void Move()

@@ -5,32 +5,43 @@ using Mirror;
 
 public class AssignHidden : NetworkBehaviour
 {
-    //[SerializeField] private GameObject[] hiddens = new GameObject[4];
-    //[SerializeField] private Transform[] spawnPos = new Transform[4];
-    private ArrayList Hides = new ArrayList();
-    // Start is called before the first frame update
+    [SerializeField] GameObject[] hides = new GameObject[4];
+    //private NetworkManagerHide manager;
+
     public override void OnStartServer()
     {
-        Assign();
+        int select = Random.Range(0, hides.Length);
+        GameObject choosen = hides[select];
+        RpcTag(choosen);
+        SvrTag(choosen);
     }
 
-    [ServerCallback]
-    private void Assign()
+    [Server]
+    void SvrTag(GameObject a)
     {
+        a.tag = "Hidden";
+    }
+
+    [ClientRpc]
+    void RpcTag(GameObject a)
+    {
+        a.tag = "Hidden";
+    }
+
+    /*
+    public void Assign()
+    {
+        
         foreach (Transform child in transform)
         {
             Hides.Add(child);
-            NetworkServer.Spawn(child.gameObject);
             // Debug.Log(child.gameObject.name);
         }
         int select = Random.Range(0, Hides.Count);
         GameObject choosen = ((Transform)Hides[select]).gameObject;
-        RpcTag(choosen);
-    }
+        //CmdTag(choosen);
+        //choosen.tag = "Hidden";
+        manager.ChangeTag(choosen);
+    }*/
 
-    [ClientRpc]
-    private void RpcTag(GameObject a)
-    {
-        a.tag = "Hidden";
-    }
 }

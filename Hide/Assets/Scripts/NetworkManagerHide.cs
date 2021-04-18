@@ -147,6 +147,25 @@ public class NetworkManagerHide : NetworkManager
         base.ServerChangeScene(newSceneName);
     }
 
+    /*
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        if (sceneName.StartsWith("playMap"))
+        {
+            Debug.Log("hi");
+            GameObject hide = GameObject.Find("Hidden");
+            hide?.GetComponent<AssignHidden>().Assign();
+        }
+    }
+
+    public void ChangeTag(GameObject hide)
+    {
+        for(int i= GamePlayers.Count-1; i>0; i--)
+        {
+            GamePlayers[i].ChangeTag(hide);
+        }
+    }*/
+
     public override void OnServerReady(NetworkConnection conn)
     {
         base.OnServerReady(conn);

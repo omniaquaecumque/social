@@ -92,73 +92,73 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11322}
+      Script: {instanceID: 11328}
     - Class: 114
-      Script: {instanceID: 11324}
+      Script: {instanceID: 11330}
     - Class: 114
-      Script: {instanceID: 11348}
+      Script: {instanceID: 11354}
     - Class: 114
-      Script: {instanceID: 11352}
+      Script: {instanceID: 11358}
     - Class: 114
-      Script: {instanceID: 11458}
+      Script: {instanceID: 11464}
     - Class: 114
-      Script: {instanceID: 11712}
+      Script: {instanceID: 11718}
     - Class: 114
-      Script: {instanceID: 11734}
+      Script: {instanceID: 11740}
     - Class: 114
-      Script: {instanceID: 11752}
-    - Class: 114
-      Script: {instanceID: 11902}
+      Script: {instanceID: 11758}
     - Class: 114
       Script: {instanceID: 11908}
     - Class: 114
-      Script: {instanceID: 12038}
+      Script: {instanceID: 11914}
     - Class: 114
-      Script: {instanceID: 12234}
+      Script: {instanceID: 12044}
     - Class: 114
-      Script: {instanceID: 12372}
+      Script: {instanceID: 12242}
     - Class: 114
-      Script: {instanceID: 12420}
+      Script: {instanceID: 12380}
     - Class: 114
-      Script: {instanceID: 12536}
+      Script: {instanceID: 12428}
     - Class: 114
-      Script: {instanceID: 12812}
+      Script: {instanceID: 12544}
     - Class: 114
-      Script: {instanceID: 12932}
+      Script: {instanceID: 12822}
     - Class: 114
-      Script: {instanceID: 13300}
+      Script: {instanceID: 12942}
     - Class: 114
-      Script: {instanceID: 13408}
+      Script: {instanceID: 13310}
     - Class: 114
-      Script: {instanceID: 13434}
+      Script: {instanceID: 13418}
     - Class: 114
-      Script: {instanceID: 13480}
+      Script: {instanceID: 13444}
     - Class: 114
-      Script: {instanceID: 13498}
+      Script: {instanceID: 13490}
     - Class: 114
-      Script: {instanceID: 13506}
+      Script: {instanceID: 13508}
     - Class: 114
-      Script: {instanceID: 13588}
+      Script: {instanceID: 13516}
     - Class: 114
-      Script: {instanceID: 13738}
+      Script: {instanceID: 13598}
     - Class: 114
-      Script: {instanceID: 13832}
+      Script: {instanceID: 13748}
     - Class: 114
-      Script: {instanceID: 13932}
+      Script: {instanceID: 13842}
     - Class: 114
-      Script: {instanceID: 14000}
+      Script: {instanceID: 13942}
     - Class: 114
-      Script: {instanceID: 14018}
+      Script: {instanceID: 14010}
     - Class: 114
-      Script: {instanceID: 14206}
+      Script: {instanceID: 14028}
     - Class: 114
-      Script: {instanceID: 14248}
+      Script: {instanceID: 14216}
     - Class: 114
-      Script: {instanceID: 14434}
+      Script: {instanceID: 14258}
     - Class: 114
-      Script: {instanceID: 14540}
+      Script: {instanceID: 14444}
     - Class: 114
-      Script: {instanceID: 14664}
+      Script: {instanceID: 14550}
+    - Class: 114
+      Script: {instanceID: 14674}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -181,8 +181,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
-    - Class: 258
-      Script: {instanceID: 0}
     Assets/Scenes/playMap.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -204,8 +202,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 64
       Script: {instanceID: 0}
-    - Class: 65
-      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 89
@@ -215,35 +211,35 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11322}
+      Script: {instanceID: 11328}
     - Class: 114
-      Script: {instanceID: 11324}
+      Script: {instanceID: 11330}
     - Class: 114
-      Script: {instanceID: 11352}
+      Script: {instanceID: 11358}
     - Class: 114
-      Script: {instanceID: 11644}
+      Script: {instanceID: 11650}
     - Class: 114
-      Script: {instanceID: 11712}
+      Script: {instanceID: 11718}
     - Class: 114
-      Script: {instanceID: 12248}
+      Script: {instanceID: 12166}
     - Class: 114
-      Script: {instanceID: 12372}
+      Script: {instanceID: 12256}
     - Class: 114
-      Script: {instanceID: 13328}
+      Script: {instanceID: 12380}
     - Class: 114
-      Script: {instanceID: 13778}
+      Script: {instanceID: 13338}
     - Class: 114
-      Script: {instanceID: 13932}
+      Script: {instanceID: 13788}
     - Class: 114
-      Script: {instanceID: 14018}
+      Script: {instanceID: 13942}
     - Class: 114
-      Script: {instanceID: 14424}
+      Script: {instanceID: 14028}
     - Class: 114
       Script: {instanceID: 14434}
     - Class: 114
-      Script: {instanceID: 14496}
+      Script: {instanceID: 14444}
     - Class: 114
-      Script: {instanceID: 27096}
+      Script: {instanceID: 14506}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -252,9 +248,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 136
       Script: {instanceID: 0}
+    - Class: 154
+      Script: {instanceID: 0}
+    - Class: 156
+      Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 218
       Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
@@ -263,6 +265,8 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
     - Class: 225
+      Script: {instanceID: 0}
+    - Class: 1953259897
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -441,7 +445,7 @@ ScriptsOnlyBuild:
     className: PhysicsCollision
   - hash:
       serializedVersion: 2
-      Hash: 6fd2bb55b3ee5edb6040a1c5bccd0e07
+      Hash: 530630f9aa2a3d902dc756396716c8e9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AssignHidden
@@ -673,6 +677,12 @@ ScriptsOnlyBuild:
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
     className: CinemachineFreeLook
+  - hash:
+      serializedVersion: 2
+      Hash: d83af3443d443ac8f42237334682dead
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ModelCustomizer
   - hash:
       serializedVersion: 2
       Hash: 192ca9716d03752ea1d90a78bc2daac9
@@ -1753,12 +1763,6 @@ ScriptsOnlyBuild:
     assemblyName: Mirror.dll
     namespaceName: kcp2k
     className: KcpTransport
-  - hash:
-      serializedVersion: 2
-      Hash: d83af3443d443ac8f42237334682dead
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ModelCustomizer
   platform: 19
   scenePathNames:
   - Assets/Scenes/Login.unity

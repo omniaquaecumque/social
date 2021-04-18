@@ -27,6 +27,8 @@ public class GamePlayer : NetworkBehaviour
         DontDestroyOnLoad(gameObject);
 
         Room.GamePlayers.Add(this);
+
+        gameObject.transform.position = new Vector3(35, -5, 15);
     }
 
     public override void OnStopClient()
@@ -38,11 +40,18 @@ public class GamePlayer : NetworkBehaviour
     public void SetDisplayName(string displayName)
     {
         this.displayName = displayName;
+        this.name = displayName;
     }
 
     [Server]
     public void ShowWinMsg()
     {
         winPanel.SetActive(true);
+    }
+
+    public void ChangeTag(GameObject hide)
+    {
+        Debug.Log(hide.name);
+        hide.tag = "hidden";
     }
 }

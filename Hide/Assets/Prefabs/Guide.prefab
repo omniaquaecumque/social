@@ -591,6 +591,7 @@ GameObject:
   - component: {fileID: -6273788933268364774}
   - component: {fileID: -3533977732537956436}
   - component: {fileID: -7980497684995774959}
+  - component: {fileID: -4904637137218873143}
   m_Layer: 9
   m_Name: Guide
   m_TagString: Untagged
@@ -700,6 +701,27 @@ CharacterController:
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4904637137218873143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7963077773579279567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  localPositionSensitivity: 0.01
+  localRotationSensitivity: 0.01
+  localScaleSensitivity: 0.01
+  compressRotation: 0
+  interpolateScale: 1
+  syncScale: 1
 --- !u!1 &8265036730792049304
 GameObject:
   m_ObjectHideFlags: 0
