@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Mirror;
 
 public class GameStorage : NetworkBehaviour
-{   
+{    
     [SyncVar]
     public bool timerStart;
 
@@ -36,7 +36,7 @@ public class GameStorage : NetworkBehaviour
 
     public SyncList<string> KeyPadSubparts = new SyncList<string>() { "", ""};
 
-    public SyncList<bool> TasksCompleted = new SyncList<bool>() { false, false, false, false, false, false, false };
+    public SyncList<bool> TasksCompleted = new SyncList<bool>() { false, false, false, false, false, false, false, false };
 
     [SyncVar]
     public bool Lost;
@@ -165,7 +165,7 @@ public class GameStorage : NetworkBehaviour
             }
             if (Won == true) {
                 YouWin.SetActive(true);
-            
+                firstWinLose = true;
             }
 
         }
