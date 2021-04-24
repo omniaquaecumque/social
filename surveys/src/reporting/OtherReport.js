@@ -8,6 +8,8 @@ class OtherReport extends Component{
     How this works is that there are a bunch of temporary variables
     date1 to info1 that are updated automatically on this form.
     When we hit submit, it moves the temp variables into the actual variables
+    If we are to link this to a database, when the data is submitted, add
+    the "1" variables when we submit
     */
     state = {
         step: 1, //indexes the page number essentially

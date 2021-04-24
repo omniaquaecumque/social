@@ -8,9 +8,12 @@ import ReportDiscrimination from './reporting/ReportDiscrimination';
 import OtherReport from './reporting/OtherReport';
 
 class App extends Component{
+  /*
+  sets the links for routing to each page
+  */
   render(){
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <div className="App">
           <Switch>
             <Route path = "/" exact component = {Home}/>
