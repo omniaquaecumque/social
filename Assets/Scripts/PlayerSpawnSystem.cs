@@ -9,13 +9,12 @@ using System;
 
 public class PlayerSpawnSystem : NetworkBehaviour
 {
-    public int spawned = 3;
-    //private int playerLayer = 9;
-
-    [SerializeField] private GameObject playerPrefab = null;
+    [SerializeField] private GameObject playerDefenderPrefab = null;
+    [SerializeField] private GameObject playerSabotagerPrefab = null;
 
     private static List<Transform> spawnPoints = new List<Transform>();
 
+    private int spawned = 0;
     private int nextIndex = 0;
 
     public static void AddSpawnPoint(Transform transform)
@@ -42,12 +41,19 @@ public class PlayerSpawnSystem : NetworkBehaviour
             return;
         }
 
-        GameObject playerInstance = Instantiate(playerPrefab, spawnPoints[nextIndex].position, spawnPoints[nextIndex].rotation);
+        GameObject playerInstance = null;
+        if (spawned % 2 == 0) {
+            playerInstance = Instantiate(playerDefenderPrefab, spawnPoints[nextIndex].position, spawnPoints[nextIndex].rotation);
+        } else {
+            playerInstance = Instantiate(playerSabotagerPrefab, spawnPoints[nextIndex].position, spawnPoints[nextIndex].rotation);
+        }
+        
         GameManager.IncrementPlayer();
         GameManager.RegisterPlayer(playerInstance);
         NetworkServer.Spawn(playerInstance, conn);
         
         nextIndex++;
+        spawned++;
     }
 
 }

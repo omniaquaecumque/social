@@ -9,7 +9,7 @@ using System;
 
 public class NetworkManagerLobby : NetworkManager
 {
-    [SerializeField] private int minPlayers = 3;
+    [SerializeField] private int minPlayers = 4;
     [Scene] [SerializeField] private string menuScene = string.Empty;
 
     [Header("Room")]

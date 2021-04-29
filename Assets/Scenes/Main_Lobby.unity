@@ -15290,6 +15290,7 @@ MonoBehaviour:
   - {fileID: 3134534458331162055, guid: fbfa71a267b2e7848b395da7a6032724, type: 3}
   - {fileID: 3354492417619515090, guid: a58ce3cd958b50b47804f14823552346, type: 3}
   - {fileID: 4563957851523021336, guid: a9b8c0fa40183684c99e5752cdb0fa91, type: 3}
+  - {fileID: 2628145058804465699, guid: a2ef1f9c466625f4a95e6f83de8628de, type: 3}
   minPlayers: 1
   menuScene: Assets/Scenes/Main_Lobby.unity
   roomPlayerPrefab: {fileID: 1621039995931742129, guid: fbfa71a267b2e7848b395da7a6032724,
