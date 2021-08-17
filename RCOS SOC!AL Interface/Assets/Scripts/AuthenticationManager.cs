@@ -4,19 +4,19 @@ using Amazon.Extensions.CognitoAuthentication;
 using Amazon.CognitoIdentity;
 using Amazon.CognitoIdentityProvider;
 using Amazon.CognitoIdentityProvider.Model;
+using Amazon.CognitoSync;
+using Amazon.CognitoSync.Model;
 using System;
 using System.Threading.Tasks;
 using System.Net;
 
 public class AuthenticationManager : MonoBehaviour
 {
-   // the AWS region of where your services live
    public static Amazon.RegionEndpoint Region = Amazon.RegionEndpoint.GetBySystemName("us-east-2");
 
-   // In production, should probably keep these in a config file
-   const string IdentityPool = "us-east-2:f5dbad57-a98d-41e9-9a14-de47afde92be"; // Cognito User Pool ID, found under General Settings
-   const string AppClientID = "3ulv8e58tnf0qbc2f18dodq5et"; // App client ID, found under App Client Settings
-   const string userPoolId = "us-east-2_4pdcMhf20";
+   const string IdentityPool = "us-east-2:166aed30-aef6-4107-b6f0-52045e5637d3";
+   const string AppClientID = "3ufqcro28rhtvj2mq8ufg0814";
+   const string userPoolId = "us-east-2_WgB7saxn6";
 
     private AmazonCognitoIdentityProviderClient _provider;
     private CognitoAWSCredentials _cognitoAWSCredentials;
@@ -24,7 +24,12 @@ public class AuthenticationManager : MonoBehaviour
     private CognitoUser _user;
     private string _errorMsg;
 
-   public async Task<bool> RefreshSession()
+    private AmazonCognitoSyncConfig clientConfig = new AmazonCognitoSyncConfig { RegionEndpoint = Region };
+    private Dataset userData = new Dataset();
+    //userData.Put("myKey", "newValue");
+    //private CognitoSyncManager syncManager = new CognitoSyncManager(credentials, clientConfig);
+
+    public async Task<bool> RefreshSession()
    {
       Debug.Log("RefreshSession");
 
@@ -36,7 +41,6 @@ public class AuthenticationManager : MonoBehaviour
       {
          CognitoUserPool userPool = new CognitoUserPool(userPoolId, AppClientID, _provider);
 
-         // apparently the username field can be left blank for a token refresh request
          CognitoUser user = new CognitoUser("", AppClientID, userPool, _provider);
 
          // The "Refresh token expiration (days)" (Cognito->UserPool->General Settings->App clients->Show Details) is the
@@ -76,7 +80,7 @@ public class AuthenticationManager : MonoBehaviour
 
          return true;
       }
-      catch (NotAuthorizedException ne)
+      catch (Amazon.CognitoIdentityProvider.Model.NotAuthorizedException ne) // May have bug
       {
          // https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-with-identity-providers.html
          // refresh tokens will expire - user must login manually every x days (see user pool -> app clients -> details)
@@ -127,7 +131,7 @@ public class AuthenticationManager : MonoBehaviour
             _cognitoAWSCredentials = user.GetCognitoAWSCredentials(IdentityPool, Region);
 
             _user = user;
-
+            
             return true;
         }
         catch (Exception e)
@@ -170,6 +174,7 @@ public class AuthenticationManager : MonoBehaviour
       catch (Exception e)
       {
          Debug.Log("Sign up failed, exception: " + e);
+         _errorMsg = e.Message;
          return false;
       }
    }
